@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://docstruct.com/sitemap.xml.gz
+Sitemap: https://docs.structej.com/sitemap.xml.gz
