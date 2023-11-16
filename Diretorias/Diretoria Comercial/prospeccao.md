@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 8
 icon: person-add
 label: Prospecção e o Primeiro Contato
 author:
