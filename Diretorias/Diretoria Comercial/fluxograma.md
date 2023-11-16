@@ -31,4 +31,4 @@ Quando conseguimos o primeiro contato com o cliente através da Prospecção, en
 
 9. Se a lead **assinar o contrato**, colete o feedback do cliente com o [Formulário de Satisfação](https://docs.google.com/forms/d/e/1FAIpQLSfJUYtK_alvTOVS7Wcpy7N681MoI1fJgtuVOk-xOWoVNiT4wQ/viewform?usp=sf_link) e cadastre o projeto no Portal BJ. Caso ela não queira assinar o contrato veja o motivo e tente uma negociação, se não funcionar finalize o contato com a lead seguindo o protocolo do *passo a*.
 
-A. Último passo: tente coletar o feedback do cliente com o [Formulário de Satisfação](https://docs.google.com/forms/d/e/1FAIpQLSfJUYtK_alvTOVS7Wcpy7N681MoI1fJgtuVOk-xOWoVNiT4wQ/viewform?usp=sf_link) e **finalize a interação** dizendo que a Struct sempre estará disponível.
+10. Último passo: tente coletar o feedback do cliente com o [Formulário de Satisfação](https://docs.google.com/forms/d/e/1FAIpQLSfJUYtK_alvTOVS7Wcpy7N681MoI1fJgtuVOk-xOWoVNiT4wQ/viewform?usp=sf_link) e **finalize a interação** dizendo que a Struct sempre estará disponível.
