@@ -1,7 +1,7 @@
 ---
 order: 3
-icon: rocket
-label: "O que é Netlify ?"
+icon: question
+label: "O que é?"
 ---
 
 <!-- Ultima atualização: 23/09/2023 -->
