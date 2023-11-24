@@ -52,14 +52,10 @@ p {
     color: red;
 }
 ```
+OBS: a tag link é utilizada para integrar o arquivo .css com o HTML.
 
-{% hint style="info" %}
-    OBS: a tag link é utilizada para integrar o arquivo .css com o HTML.
-{% endhint %}
+OBS2: a forma mais apropriada para integrar é utilizando o arquivo separado. 
 
-{% hint style="info" %}
-    OBS2: a forma mais apropriada para integrar é utilizando o arquivo separado. 
-{% endhint %}
 
 ## Seletores
 Existem alguns tipos de seletores: por tag HTML, por classe e por id.
@@ -134,7 +130,7 @@ Apenas para um elemento que tenha as classes dark, large e spaced essas regras s
 }
 ```
 #### Seletores Descedentes
-Uma relação de descendência entre os seletores. A sintaxe é
+Uma relação de descendência entre os seletores. A sintaxe é:
 ```CSS
 seletor1 seletor2 {
     regras...
@@ -190,9 +186,8 @@ Quando existem regras conflitantes entre si, por exemplo 2 regras mudando a cor 
 3. Seletor de Classe
 4. Regras que vierem depois de outras que estão antes no arquivo
 
-{% hint style="info" %}
-    OBS: pode-se usar !important depois de uma regra para anular qualquer outra, independentemente da precedência explicada anteriormente.
-{% endhint %}
+OBS: pode-se usar !important depois de uma regra para anular qualquer outra, independentemente da precedência explicada anteriormente.
+
 
 ## Propriedades
 São as regras que serão passadas aos elementos selecionados pelos seletores. Antes de falarmos das propriedades, falaremos de algumas unidades utilizadas nessas regras.
@@ -206,7 +201,7 @@ No HTML e CSS existem várias unidades que serão utilizadas para definir o espa
 #### Pixel
 É a unidade mais comum de medição. Representa um pixel na tela(depende da tela utilizada).
 ##### Exemplo
-![Relação pixels](/imagens/pixel.png)
+[Relação_pixels](/Imagens DocStruct/Projetos/pixel.png)
 
 #### Rem
 É uma unidade relativa ao tamanho da fonte do elemento raiz(html, body), ou seja, é bem útil para padronizar o site. Na maioria dos browsers dos computadores, 1rem equivale a 16px.
@@ -261,9 +256,9 @@ p {
     font-family: 'Inconsolata', monospace;
 }
 ```
-{% hint style="info" %}
-    Ambos os códigos foram tirados do próprio site do [Google Fonts](https://fonts.google.com/specimen/Inconsolata)
-{% endhint %}
+
+Ambos os códigos foram tirados do próprio site do [Google Fonts](https://fonts.google.com/specimen/Inconsolata)
+
 
 #### Color
 É a cor do texto. Pode ser:
@@ -289,37 +284,37 @@ Propriedade utilizada para colocar uma imagem no fundo no container. Propriedade
 * border-style: tem alguns valores padrão: none, hidden, solid, dotted, dashed, groove, ridge, inset e outset
 * border-color: tem os mesmos valores que "color".
 
-{% hint style="info" %}
-    OBS: Border-radius é uma outra propriedade relacionada à borda que deve ser definida separadamente para arredondar os cantos das bordas. O valor é de unidade de medida. 
-{% endhint %}
 
-{% hint style="info" %}
-    OBS2: Todas essas propriedades podem ser definidas para apenas um dos cantos usando border-(left/right/top/bottom) ou ainda definir para os 4 cantos de uma vez da seguinte forma:
-{% endhint %}
+OBS: Border-radius é uma outra propriedade relacionada à borda que deve ser definida separadamente para arredondar os cantos das bordas. O valor é de unidade de medida. 
+
+
+
+OBS2: Todas essas propriedades podem ser definidas para apenas um dos cantos usando border-(left/right/top/bottom) ou ainda definir para os 4 cantos de uma vez da seguinte forma:
+
 
     * 1 valor(será aplicado para todos os 4)
     * 2 valores(top e bottom para o primeiro valor, left e right para o segundo)
     * 4 valores(top, right, bottom e left) 
 
 #### Margin
-É uma propriedade que define quanto de espaço o elemento irá "empurrar" os elementos adjacentes. Usam-se as unidades de medida. Podem ser aplicadas as regras da [OBS2 da Border](#obs2-todas-essas-propriedades-podem-ser-definidas-para-apenas-um-dos-cantos-usando-border-leftrighttopbottom-ou-ainda-definir-para-os-4-cantos-de-uma-vez-da-seguinte-forma) para definir para um dos 4 cantos.
+É uma propriedade que define quanto de espaço o elemento irá "empurrar" os elementos adjacentes. Usam-se as unidades de medida. Podem ser aplicadas as regras da OBS2 da Border para definir para um dos 4 cantos.
 
 #### Padding
 É a propriedade que define quanto de espaço entre o elemento e a borda tem que existir. Usam-se as unidades de medida.
-Podem ser aplicadas as regras da [OBS2 da Border](#obs2-todas-essas-propriedades-podem-ser-definidas-para-apenas-um-dos-cantos-usando-border-leftrighttopbottom-ou-ainda-definir-para-os-4-cantos-de-uma-vez-da-seguinte-forma) para definir para um dos 4 cantos.
+Podem ser aplicadas as regras da OBS2 da Border para definir para um dos 4 cantos.
 
 #### Width e Height
 São duas propriedades que definem qual será o tamanho do elemento. Quando se coloca apenas uma delas, a outra é calculada automaticamente. Os valores podem ser:
 * Valores de unidade de medida
 * Valores padrão como max-content, min-content e fit-content
 
-{% hint style="info" %}
-    OBS: os prefixos max- e min- podem ser usados antes de width e height para definir outras propriedades que definem um tamanho máximo ou mínimo para o elemento.
-{% endhint %}
+
+OBS: os prefixos max- e min- podem ser usados antes de width e height para definir outras propriedades que definem um tamanho máximo ou mínimo para o elemento.
+
 
 ## The Box Model
 As 4 últimas propriedades fazem parte do Box Model:
-![Box Model](/imagens/box_model.png)
+[Box_Model](Imagens DocStruct/Projetos/box_model.png)
 ### Propriedade Box-sizing
 Define se as propriedades de height e width vão considerar apenas o conteúdo da caixa e padding e border são "adicionais"(content-box) ou vão considerar a padding e a border também, sendo o tamanho total considerado para o cálculo dessas propriedades(border-box).
 ### Propriedades de Overflow
@@ -329,9 +324,9 @@ Define se as propriedades de height e width vão considerar apenas o conteúdo d
 * visible: o overflow fica visível
 * scroll: adiciona um scroll, mesmo que não seja necessário
 
-{% hint style="info" %}
-    OBS: É possível utilizar essa propriedade separadamente para eixo x e y, utilizando overflow-x ou overflow-y.
-{% endhint %}
+
+OBS: É possível utilizar essa propriedade separadamente para eixo x e y, utilizando overflow-x ou overflow-y.
+
 
 ## Propriedade Display
 Essa propriedade define como o elemento será disposto na tela. Existem 2 tipos principais de elemento no HTML:
@@ -357,18 +352,17 @@ Entre essas propriedades temos:
   * flex-shrink: o contrário do que o flex-grow faz(faz o elemento diminuir com base nos "elementos irmãos" com menores valores) 
   * flex-basis: dependendo se a flex-direction é row(ou row-reverse)/column(ou column-reverse), vai governar o width/height do flex-item
 
-  {% hint style="info" %}
-    OBS: é possível determinar somente a primeira propriedade, por exemplo: `flex: 1;`
-  {% endhint %}
+ OBS: é possível determinar somente a primeira propriedade, por exemplo: `flex: 1;`
+ 
 
 * justify-content/align-items: essas 2 propriedades de flexbox ajudam a ajustar o elemento no container, para auxiliar a colocá-los da forma que desejamos. Elas vão depender da flex-direction.
   Valores para justify-content(flex-direction da esquerda é row e o da direita é column):
 
-  ![Flexbox justify-content row](/imagens/flexbox-row-justify-content.png) ![Flexbox justify-content column](/imagens/flexbox-column-justify-content.png)
+  [Flexbox_justify-content_row](Imagens DocStruct/Projetos/flexbox-row-justify-content.png) [Flexbox_justify-content_column](Imagens DocStruct/Projetos/flexbox-column-justify-content.png)
 
   Valores para align-items(flex-direction da esquerda é row e o da direita é column):
 
-  ![Flexbox align-items row](/imagens/flexbox-row-align-items.png) ![Flexbox align-items column](/imagens/flexbox-column-align-items.png)
+  [Flexbox_align-items_row](Imagens DocStruct/Projetos/flexbox-row-align-items.png) [Flexbox_align-items_column](Imagens DocStruct/Projetos/flexbox-column-align-items.png)
 
 * align-content: como as linhas(no caso de justify-content row) ou colunas(no caso de justify-content column) serão organizadas.
 
@@ -431,4 +425,4 @@ Algumas propriedades são:
         color: red;
     }
     ```
-    ![nth-child even](/imagens/nth-child-even.png)
+    ![nth-child_even](Imagens DocStruct/Projetos/nth-child-even.png)
