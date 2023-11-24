@@ -201,7 +201,7 @@ No HTML e CSS existem várias unidades que serão utilizadas para definir o espa
 #### Pixel
 É a unidade mais comum de medição. Representa um pixel na tela(depende da tela utilizada).
 ##### Exemplo
-[Relação_pixels](/Imagens DocStruct/Projetos/pixel.png)
+![Relação pixels](<../../Imagens DocStruct/Projetos/pixel.png>)
 
 #### Rem
 É uma unidade relativa ao tamanho da fonte do elemento raiz(html, body), ou seja, é bem útil para padronizar o site. Na maioria dos browsers dos computadores, 1rem equivale a 16px.
@@ -314,7 +314,7 @@ OBS: os prefixos max- e min- podem ser usados antes de width e height para defin
 
 ## The Box Model
 As 4 últimas propriedades fazem parte do Box Model:
-[Box_Model](Imagens DocStruct/Projetos/box_model.png)
+![Box Model](<../../Imagens DocStruct/Projetos/box_model.png>)
 ### Propriedade Box-sizing
 Define se as propriedades de height e width vão considerar apenas o conteúdo da caixa e padding e border são "adicionais"(content-box) ou vão considerar a padding e a border também, sendo o tamanho total considerado para o cálculo dessas propriedades(border-box).
 ### Propriedades de Overflow
@@ -358,11 +358,11 @@ Entre essas propriedades temos:
 * justify-content/align-items: essas 2 propriedades de flexbox ajudam a ajustar o elemento no container, para auxiliar a colocá-los da forma que desejamos. Elas vão depender da flex-direction.
   Valores para justify-content(flex-direction da esquerda é row e o da direita é column):
 
-  [Flexbox_justify-content_row](Imagens DocStruct/Projetos/flexbox-row-justify-content.png) [Flexbox_justify-content_column](Imagens DocStruct/Projetos/flexbox-column-justify-content.png)
+![Flexbox justify-content row](<../../Imagens DocStruct/Projetos/flexbox-row-justify-content.png>) ![Flexbox justify-content column](<../../Imagens DocStruct/Projetos/flexbox-column-justify-content.png>)
 
   Valores para align-items(flex-direction da esquerda é row e o da direita é column):
 
-  [Flexbox_align-items_row](Imagens DocStruct/Projetos/flexbox-row-align-items.png) [Flexbox_align-items_column](Imagens DocStruct/Projetos/flexbox-column-align-items.png)
+![Flexbox align-items row](<../../Imagens DocStruct/Projetos/flexbox-row-align-items.png>) ![Flexbox align-items column](<../../Imagens DocStruct/Projetos/flexbox-column-align-items.png>) 
 
 * align-content: como as linhas(no caso de justify-content row) ou colunas(no caso de justify-content column) serão organizadas.
 
@@ -425,4 +425,4 @@ Algumas propriedades são:
         color: red;
     }
     ```
-    ![nth-child_even](Imagens DocStruct/Projetos/nth-child-even.png)
+    ![nth-child even](<../../Imagens DocStruct/Projetos/pixel.png>)
