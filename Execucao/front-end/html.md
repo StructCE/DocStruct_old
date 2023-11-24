@@ -15,9 +15,9 @@ Ela geralmente é acompanhada pelo CSS e JavaScript, que juntos são renderizado
 </html>
 ```
 
-{% hint style="info" %}
-    Obs: A primeira linha (\<!DOCTYPE html>) serve para identificar para o navegador a versão do HTML que está sendo utilizada. No caso, a versão "html" representa o HTML5.
-{% endhint %}
+
+Obs: A primeira linha "<!DOCTYPE html>" serve para identificar para o navegador a versão do HTML que está sendo utilizada. No caso, a versão "html" representa o HTML5.
+
 
 ## Tags
 São elementos dentro do HTML que desempenham um certo papel visual, semântico ou separatório. Existem 2 tipos de tags: 
@@ -38,9 +38,9 @@ Essa tag está presente em todo arquivo HTML, pois representa onde todos os iten
 </body>
 ```
 
-{% hint style="info" %}
-    Obs: `<!-- -->` é um comentário em HTML
-{% endhint %}
+
+Obs: `<!-- -->` é um comentário em HTML
+
 
 ### Head
 Essa tag é uma das únicas que ficam fora da tag \<body>, pois é onde ficam elementos que não ficam explícitos na página em si, como \<meta> e \<title> 
@@ -61,7 +61,7 @@ Essa tag fica dentro da tag \<head> e representa o título visto na aba do naveg
 </head>
 ```
 ##### Nesse caso, "Titulo do site" apareceria na aba do navegador:
-![Titulo](../../imagens/Title_HTML.png)
+![Titulo](<../../Imagens DocStruct/Projetos/Title_HTML.png>)
 
 ### H1 até H6
 Essa é uma sequência de tags de título que entram no \<body>, que vai do \<h1>, o maior dos títulos, passando por \<h2>, \<h3>, \<h4> e \<h5>, intermediários, até o \<h6>, que é o menor.
@@ -76,7 +76,7 @@ Essa é uma sequência de tags de título que entram no \<body>, que vai do \<h1
     <h6>Título com h6</h6>
 </body>
 ```
-![H1 H2 H3 H4 H5 E H6](../../imagens/H123456_HTML.png)
+![H1 H2 H3 H4 H5 E H6](<../../Imagens DocStruct/Projetos/H123456_HTML.png>)
 
 ### Div
 Essa tag é meramente separatória, serve para separar blocos sem ter a semântica de outras tags, como a section. Pode ser útil para facilitar a divisão e estilo de conjuntos de elementos.
@@ -144,9 +144,9 @@ Essa tag representa uma imagem. Para que o navegador saiba de onde encontrar o c
 </body>
 ```
 
-{% hint style="info" %}
-    OBS: \<img/> é uma tag que se fecha sozinha, como mostrada no exemplo.
-{% endhint %}
+
+OBS: \<img/> é uma tag que se fecha sozinha, como mostrada no exemplo.
+
 
 ### A
 Essa tag é o link para outra página da web, outra página do próprio site ou outra parte do site. Para que o navegador saiba para onde o link vai, o atributo "href" é utilizado. Por padrão, o link é exibido com uma cor azul e tem uma decoração tipica de links no texto.
@@ -184,7 +184,7 @@ Aqui vamos falar de 2 tipos de listas no HTML: as listas ordenadas(\<ol>) e as l
     </ul>
 </body>
 ```
-![Listas no HTML](../../imagens/Lists_HTML.png)
+![Listas no HTML](<../../Imagens DocStruct/Projetos/Lists_HTML.png>)
 
 ## Atributos
 Os atributos são utilizados dentro da "tag de abertura", no caso de uma tag que precisa de uma tag para abrir e outra para fechar, ou dentro da única tag, no caso de uma tag que "se fecha sozinha". A sintaxe para colocar os atributos geralmente é: nomedoatributo="valor", onde valor depende do que se quer colocar para o atributo. 
@@ -216,9 +216,9 @@ Nos exemplos passados, utilizamos os atributos como src e href, mas agora vamos 
 <a class="meus-elementos"></a>
 ```
 
-{% hint style="info" %}
-    Obs: eles não são obrigatórios.
-{% endhint %}
+
+Obs: eles não são obrigatórios.
+
 
 ### Atributos de \<img>
 
