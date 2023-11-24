@@ -24,11 +24,11 @@ Por mais que seja a maneira mais fácil de se iniciar no react, é altamente cri
 
   - SSR implica numa otimização do `carregamento inicial` das páginas (independe do pc lixo do usuário, somente do supercomputador usado como servidor), e de apresentação melhor de `metadados`.
 
-{% hint style="info" %}
+
 
 Vite e CRA são `SPA`s (single page applications) e `CSR` (client side rendered), isso `significa` que somente um HTML é dado para o cliente, e o resto do `HTML` é "`injetado`" pelo js `no próprio cliente`. Isso `implica` em `metadados` geralmente `ruins`, já que não se pode confiar no js para essa tarefa. Uma `solução` para esse problema é o `SSR`, já que o conteúdo da página é `injetado no servidor`, e só depois enviado para o cliente um HTML preenchido.
 
-{% endhint %}
+
 
 - [Remix](https://remix.run/)
 
@@ -46,7 +46,7 @@ Menos úteis pra EJ:
 
   - Será o novo node (aquele que roda código javascript fora do browser), e vai aumentar ainda mais a popularidade do SSR. Está sendo feito buscando compatibilidade máxima com aplicações já feitas. Ainda não está pronto pra produção, mas já tá sendo muito comentado.
 
-{% hint style="info" %}
+
 
 Fontes:
 https://medium.com/codex/you-should-choose-vite-over-cra-for-react-apps-heres-why-47e2e7381d13
@@ -61,4 +61,4 @@ https://www.youtube.com/c/TheoBrowne1017
 
 Além dos links já fornecidos na página.
 
-{% endhint %}
+

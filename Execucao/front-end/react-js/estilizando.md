@@ -7,11 +7,11 @@ Para instalar, basta rodar no projeto:
 yarn add styled-components
 ```
 
-{% hint style="info" %}
+
 
 Como material de referência, podendo até editar: https://codesandbox.io/s/styled-components-demo-5ir4oo
 
-{% endhint %}
+
 
 O styled-components nos fornece algumas ferramentas para criar componentes estilizados. Se o componente for uma simples tag HTML estilizada, podemos colocar o estilo diretamente no `index.js` do componente. Quando mais complexo, separamos os estilos no `styles.js`, e usamos eles no index.
 
@@ -25,11 +25,11 @@ const Button = styled.button`
 `;
 ```
 
-{% hint style="info" %}
+
 
 Para adicionar sintaxe de css e aparência mais bonita, ao invés de ficar o laranja de string, adicionar alguma extensão. No vscode, existe a extensão "styled-components" para tal.
 
-{% endhint %}
+
 
 Podemos também passar propriedades para customizar o estilo. Por exemplo, se o botão na verdade for:
 
@@ -40,13 +40,13 @@ const Button = styled.button`
 `;
 ```
 
-{% hint style="info" %}
+
 
 É boa prática deixar algum valor padrão a ser utilizado caso não seja passado a prop:
 
 `${(props) => props.backgroundColor || "red"}`
 
-{% endhint %}
+
 
 Podemos chamar um botão da cor que quisermos, mantendo os outros estilos:
 

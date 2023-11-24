@@ -2,7 +2,7 @@
 
 A componentização é um processo de modularização do web site/app, e está presente em tudo feito com React. Pode ser feita uma analogia com um computador:
 
-![Imagem da arquitetura simplificada de um computador](../../../imagens/computer_components.png)
+![Imagem da arquitetura simplificada de um computador](<../../../Imagens DocStruct/Projetos/computer_components.png>)
 
 Um computador pode ser dividido, de maneira simplificada, em memória, processador e placa-mãe. Agora imagine se tivéssemos que projetar novamente um processador toda vez que formos produzir um computador novo, o trabalho seria infinitamente mais difícil. Ao invés disso podemos criar apenas uma vez cada peça e apenas replicar ele em qualquer computador.
 
