@@ -425,4 +425,4 @@ Algumas propriedades são:
         color: red;
     }
     ```
- ![nth-child even](<../../Imagens DocStruct/Projetos/nth-child-even.png>)
+    ![nth-child even](<../../Imagens DocStruct/Projetos/nth-child-even.png>)
