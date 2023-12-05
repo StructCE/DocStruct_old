@@ -177,9 +177,21 @@ Sendo assim, geralmente se tem/compra um domínio (que.eh.tipo.isso.com) com uma
 
 ### reverse proxy
 
-### traefik
+Ele intermedia a internet e o servidor. Ao invés da requisição ir direto para quem vai servi-la, passa por um intermediário.
 
-### certificado SSL
+Esse intermediário pode configurar certificados SSL/TLS, pode redirecionar para outros servidores de acordo com o domínio, pode lidar com cache, etc.
+
+Na Struct, tipicamente sugerimos pagar e colocar o domínio no **Cloudflare** para que ele lide com os certificados automaticamente. Então usamos o **Traefik** dentro do nosso servidor para que ele redirecione a requisição para o container correto. Ou seja, a request acaba passando por 2 _reverse proxies_ antes de chegar no container que está rodando o servidor Rails/Express/NextJS/etc.
+
+https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/
+
+### Traefik
+
+É o que usamos no nosso servidor como reverse proxy. Ele redireciona a request para o container, dependendo das rules de [cada container](https://doc.traefik.io/traefik/routing/routers/). Por exemplo, podemos colocar para redirecionar requests vindo do domínio `www.structej.com` para um container, e vindo de `reminder.structej.com` para outro.
+
+Também podemos configurar o [certificado SSL/TLS de cada container](https://doc.traefik.io/traefik/https/acme/) pelo nosso proxy reverso. Caso tenha acesso ao nosso servidor, veja o `docker-compose.yml` do site struct como referência, além do nosso `traefik.yml`.
+
+### certificado SSL/TLS
 
 É a diferença do http para o https (http secure). Para garantir que a conexão com o site é criptografada (e então não pode ser interceptada), se coloca um certificado no servidor. Quando o usuário acessar seu site, caso esse certificado não seja encontrado, a conexão é http e os navegadores avisam o usuário que eles não estão seguros.
 
