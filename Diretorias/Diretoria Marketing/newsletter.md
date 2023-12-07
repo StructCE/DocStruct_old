@@ -25,7 +25,12 @@ Aqui os diretores respondem as perguntas "O que foi feito recentemente", e "Algu
 
 * Feedbacks:
 
-
+Nessa área são colocados os feedbacks que são coletados dos formulários.
+- Fomulario:
+O formulário é passado ao longo dos 2 meses que o Newsletter está sendo produzido, tanto por links no Slack e QR codes nas RGs, quanto em Struct Talks, assim é necessário uma comunicação com a GP para coletar os feedbacks falados.
+- Modelo de feedback: Feedbacks podem ser tanto para membros, diretorias e projetos, só precisa do nome em que o feedback é direcionado e o comentário em si. Em seguida, os feedbacks adquiridos no forms são colocados em um arquivo no Google Docs para ser em seguida transferidos para o Canva.
+- Canva:
+Como pode se ver em antigos feedbacks são colocados em modelos de imagens, que são produzidas em um projeto no Canva. O processo é feito na seguinte ordem: Ctrl + C / Ctrl + V do docs para o canva para ter o texto dos feedbacks lá; Apagar o fundo das imagens que estão no projeto; Ctrl + C / Ctrl + V das imagens com fundo apagado para o Newsletter no Notion.
 
 * Espaço de Convivência:
 
