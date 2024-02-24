@@ -484,21 +484,40 @@ providers: [
   CredentialsProvider({
     // O nome exibido no formulário de login (por exemplo, 'Entrar com...')
     name: "Credentials",
+
     // 'credentials' é usado para gerar um formulário na página de login.
     // Você pode especificar quais campos devem ser enviados, adicionando chaves ao objeto 'credentials'
     // por exemplo, domínio, nome de usuário, senha, token de autenticação de dois fatores, etc.
     // Você pode passar qualquer atributo HTML para a tag <input> por meio do objeto.
     credentials: {
-      username: { label: "Username", type: "text", placeholder: "jsmith" },
-      password: { label: "Password", type: "password" }
+      email: {
+        label: "Email",
+        type: "email",
+        placeholder: "exemplo@gmail.com"
+      },
+      password: {
+        label: "Password",
+        type: "password",
+        placeholder: `digite sua senha`,
+      },
     },
+
     async authorize(credentials, req) {
-      // Adicione parâmetros aqui para procurar o usuário com base nas credenciais fornecidas.
-      const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+      // verifica algum campo é vazio
+      if (!credentials?.email || !credentials.password) return null;
+
+      // Procura o usuário na database
+      const user = await prisma.user.findUnique({
+        where: { email: credentials.email },
+      });
 
       if (user) {
-        // Qualquer objeto retornado será salvo na propriedade user
-        return user
+        // Verifica se a senha passada é igual a senha da database
+        // NENHUM POUCO SEGURO!!!
+        if (credentials.password !== user.password)
+          return null;
+        else
+          return user // Qualquer objeto retornado será salvo na propriedade user
       } else {
         // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
         return null
