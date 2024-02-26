@@ -145,8 +145,8 @@ export default function RootLayout({
 }
 ```
 
-!!!
-No exemplo acima, criamos um componente AuthProvider para empacotar as páginas (children) em um `SessionProvider`, permitindo o acesso aos dados de sessão pelo `client-side` a partir da função `getSession()`. Isso poderia ter sido feito diretamente no arquivo layout, mas assim conseguimos aproveitar o componente em outros layouts e modularizar melhor quais partes da página precisam ser `client-side` ou `server-side`.
+No exemplo acima, criamos um componente AuthProvider para empacotar as páginas (children) em um `SessionProvider`, permitindo o acesso aos dados de sessão pelo `client-side` a partir da função `getSession` ou do hook `useSession`.
+Isso poderia ter sido feito diretamente no arquivo layout, mas assim conseguimos aproveitar o componente em outros layouts e modularizar melhor quais partes da página precisam ser `client-side` ou `server-side`.
 
 ```js src/components/auth/authProvider.tsx
 "use client";
@@ -158,10 +158,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default AuthProvider;
 ```
-
-!!!
-
-Dessa forma, o `useSession` terá acesso aos dados e status da sessão.
 
 !!!warning AVISO!!
 
@@ -205,7 +201,7 @@ export default function HomePage() {
 
 ##### Exemplo
 
-O Hook do React `useSession` pode ser usado no NextAuth.js como uma maneira simples de verificar se alguém está autenticado. Como no exemplo de botão de SignIn:
+O Hook do React `useSession` pode ser usado como uma maneira simples de verificar se alguém está autenticado ou não:
 
 ```js src/components/auth/signInButton.tsx
 "use client";
@@ -232,7 +228,7 @@ const SigninButton = () => {
 export default SigninButton;
 ```
 
-A ideia é armazenar os resultados do `useSession` em props para aferir se o usuário ja foi autenticado. Com isso você pode criar componentes que se comportam de maneiras diferentes caso o usuário esteja logado ou não,como no botão de login acima ou por exemplo em uma foto de perfil de uma navbar.
+A ideia é armazenar os resultados do `useSession` em props para aferir se o usuário ja foi autenticado, assim você pode criar componentes que se comportam de maneiras diferentes caso o usuário esteja logado ou não. Um outro exemplo de uso poderia ser uma foto de perfil de uma foto de perfil de uma navbar que mostra um icone default ou a foto do usuário dependendo da sessão.
 
 #### getSession()
 
@@ -245,13 +241,15 @@ Acesso:
 
 !!!
 
-O `getSession` assim como o `useSession` é uma função utilizada para obter os dados de sessão de um usuário no `client-side` do site. A difença entre ese é que o `useSession` é um hook do react, o que significa que ele está sujeito as regras dos hooks, enquanto o `getSession` é imune a elas.
+O `getSession` assim como o `useSession` é uma função utilizada para obter os dados de sessão de um usuário no `client-side` do site. A difença entre eles é que o `useSession` é um hook do react, o que significa que ele está sujeito as regras dos hooks, enquanto o `getSession` é imune a elas.
 
 !!!warning
-Recomenda-se usar essa função apenas do `client-side`, pois no `server-side` ocorrerão `fetches` extras que podem impactar a performance e funcionamento da página.
+Embora essa função funcione no `server-side`, recomenda-se que ela seja usada apenas no `client-side`, pois no primeiro caso ocorrerão `fetches` extras que podem impactar a performance e funcionamento da página.
 !!!
 
-```js exemplo
+##### Exemplo
+
+```js
 export async function HomePage() {
   const session = await getSession();
   /* ... */
@@ -286,6 +284,8 @@ export default async function Page() {
 ```
 
 ##### Exemplo 2 (getServerSideProps)
+
+Aqui você deve passar o `context` do `getServerSideProps` junto do `authOptions`
 
 ```js
 import { getServerSession } from "next-auth/next";
@@ -346,9 +346,9 @@ export default function HomePage() {
 
 ### Personalização
 
-A stack do T3 traz uma conexão pronta entre a sessão e a model `User` definida no Prisma, de forma que podemos passar parâmetros extras e acessá-los utilizando o comando `getSession()` no `client side` do nosso site.
+A stack do T3 traz uma conexão pronta entre a sessão e a model `User` definida no Prisma, de forma que podemos passar parâmetros extras e acessá-los utilizando os `fetches` de sessão no `client side` do nosso site.
 
-Dessa forma, por exemplo, podemos criar um parâmetro para o `User` no schema que indique se o usuário é um administrador e passar essa informação nos dados de sessão para as páginas, o que possibilitará criar **renderizações condicionais** de componentes ou **proteger determinadas rotas** que precisam ser restritas.
+Dessa forma podemos criar por exemplo um parâmetro para o `User` no schema que indique se o usuário é um administrador e passar essa informação nos dados de sessão para as páginas, o que possibilitará criar **renderizações condicionais** de componentes ou **proteger determinadas rotas** que precisam ser restritas.
 
 ```go
 model User {
@@ -365,7 +365,7 @@ model User {
 
 ```
 
-Para fazer com que o session inclua esse novo parâmetro, basta ir no arquivo de configurações do nextath em `src/server/auth.ts` e adicionar esse parâmetro ao `session callback` do `authOptions`:
+Para fazer com que o session inclua esse novo parâmetro, basta ir no arquivo de configurações do NextAuth em `src/server/auth.ts` e adicionar esse parâmetro ao `session callback` do `authOptions`:
 
 ```js
 export const authOptions: NextAuthOptions = {
@@ -373,14 +373,14 @@ export const authOptions: NextAuthOptions = {
     session: ({ session, user }) => ({
       ...session, // parâmetros default da session
       user: {     // usuário da session
-        ...session.user,
+        ...session.user,      // parâmetros default
         isAdmin: user.isAdmin // novo parâmetro para o user da session
       },
     }),
   },
 ```
 
-Quando você adicionar esse novo parâmetro ele já será passado dentro da sessão, mas o typescript apontará um erro de tipagem não segura. Para corrigir será necessário declarar uma nova interface para o user object da sessão no next-auth:
+Quando você adicionar esse novo parâmetro ele já será passado dentro da sessão, mas o typescript apontará um erro de tipagem não segura. Para corrigir será necessário declarar uma nova interface para o user object da sessão no módulo `next-auth`:
 
 ```js
 declare module "next-auth" {
@@ -503,7 +503,7 @@ providers: [
     },
 
     async authorize(credentials, req) {
-      // verifica algum campo é vazio
+      // Verifica algum campo é vazio
       if (!credentials?.email || !credentials.password) return null;
 
       // Procura o usuário na database
@@ -511,26 +511,25 @@ providers: [
         where: { email: credentials.email },
       });
 
-      if (user) {
-        // Verifica se a senha passada é igual a senha da database
-        // NENHUM POUCO SEGURO!!!
-        if (credentials.password !== user.password)
-          return null;
-        else
-          return user // Qualquer objeto retornado será salvo na propriedade user
-      } else {
-        // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
-        return null
+      // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
+      if (!user) return null
 
-        // Você também pode rejeitar este retorno de chamada com um erro, assim o usuário será
-        // redirecionado para a página de erro com a mensagem de erro como um parâmetro de consulta
-      }
+      // Verifica se a senha passada é igual a senha da database
+      // NENHUM POUCO SEGURO!!!
+      if (credentials.password !== user.password) return null;
+
+      // Qualquer objeto retornado será salvo na propriedade user
+      return user
     }
   })
 ]
 ...
 
 ```
+
+!!!
+Você também pode rejeitar este retorno de chamada com um erro, assim o `client-side` pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.
+!!!
 
 ## Proteção de Rotas
 
