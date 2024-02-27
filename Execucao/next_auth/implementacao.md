@@ -110,7 +110,80 @@ const handler = NextAuth({
 export { handler as GET, handler as POST };
 ```
 
-### Fetch e PreFetch
+### Controle
+
+#### SignIn()
+
+!!!
+Acesso:
+
+- Client-Side: **YES**
+
+- Server-Side: **NO**
+
+!!!
+
+Por padrão, ao chamar o método `signIn()` sem argumentos, você será redirecionado para a página de login do NextAuth dentro da rota `/api/auth/session`. Essa página possui uma interface básica que lista todos os provedores de autenticação inseridos no `authOptions`, mas não pode ser personalizada e expõe a rota api ao usuário.
+
+##### Provedor externo
+
+Você pode redirecionar o usuário diretamente para a página seu provedor de autenticação externo passando o `id` do provedor dentro de `signIn()`.
+Além disso, você pode especificar para qual página o usuário irá retornar após o login passando uma Url no segundo argumento da função.
+
+```js googleSignInButton.tsx
+import { signIn } from "next-auth/react";
+
+export default function GoogleSignInButton() {
+  return (
+    <button onClick={() => signIn("google", { callbackUrl: "/user/profile" })}>
+      Sign in with Google
+    </button>
+  );
+}
+```
+
+#### Provedor interno
+
+No caso do `crendentials` ou `email` provider, você pode querer lidar com a resposta de login na mesma página e desabilitar o redirecionamento padrão. Por exemplo, se ocorrer um erro (como credenciais incorretas fornecidas pelo usuário), você pode querer tratar o erro na mesma página. Para isso, você pode passar `redirect: false` dentro do segundo parâmetro da função.
+
+```js login/page.tsx
+import { signIn, useSession } from "next-auth/react";
+import { useState } from "react";
+export default function LoginPage() {
+  //hook para ter acesso ao resultado do SignIn
+  const [signInResponse, setSignInResponse] = useState(null);
+  const [password, setPassword] = useState(null);
+  const { data: session, status } = useSession();
+
+  const handleSignIn = async () => {
+    const response = await signIn("credentials", {
+      redirect: false,
+      callbackUrl: "/user/profile",
+      password: password, // passado pelo hook
+    });
+    setSignInResponse(response);
+  };
+
+  // Formulário de login
+  // ...
+  // ...
+  // Botão de login:
+  <button onClick={handleSignIn}>Sign in</button>;
+}
+```
+
+#### SignOut()
+
+!!!
+Acesso:
+
+- Client-Side: **YES**
+
+- Server-Side: **NO**
+
+!!!
+
+### Fetching
 
 #### useSession()
 
@@ -344,11 +417,15 @@ export default function HomePage() {
 }
 ```
 
-### Personalização
+## Callbacks
 
-A stack do T3 traz uma conexão pronta entre a sessão e a model `User` definida no Prisma, de forma que podemos passar parâmetros extras e acessá-los utilizando os `fetches` de sessão no `client side` do nosso site.
+### Session Callback
 
-Dessa forma podemos criar por exemplo um parâmetro para o `User` no schema que indique se o usuário é um administrador e passar essa informação nos dados de sessão para as páginas, o que possibilitará criar **renderizações condicionais** de componentes ou **proteger determinadas rotas** que precisam ser restritas.
+O `session callback` é chamado sempre que uma sessão é verificada (`getSession()`, `getServerSession()`, `/api/auth/session`, etc).
+
+**Por padrão, apenas uma parte do token é retornado como medida de segurança**, mas podemos facilmente personalizar quais dados de sessão são retornados. Para isso, a stack do T3 traz uma conexão pronta entre a sessão e a database a partir da model `User` definida no Prisma e com isso podemos passar parâmetros extras e acessá-los utilizando os `fetches` de sessão no `client-side`.
+
+Dessa forma podemos criar, por exemplo, um parâmetro para o `User` no schema que indique se o usuário é um administrador e passar essa informação nos dados de sessão para as páginas, o que possibilitará criar **renderizações condicionais** de componentes ou **proteger determinadas rotas** que precisam ser restritas.
 
 ```go
 model User {
@@ -407,7 +484,9 @@ declare module "next-auth" {
 
 ### SignOut -->
 
-## Provedores
+### SignIn Callback
+
+## Providers
 
 O Next Auth possibilita que o critério de autenticação (provedores) seja por meio de credenciais customizáveis (nome, senha, email, etc) ou por provedores externos (Google, GitHub, Discord, etc).
 
