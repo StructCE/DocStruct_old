@@ -117,6 +117,8 @@ A autenticação por Credenciais permite lidar com o login usando credenciais ar
 ```js
 
 import CredentialsProvider from "next-auth/providers/credentials";
+import { prisma } from "~/server/db";
+import { compare } from "bcrypt"
 ...
 providers: [
   CredentialsProvider({
@@ -142,22 +144,38 @@ providers: [
 
     async authorize(credentials, req) {
       // Verifica algum campo é vazio
-      if (!credentials?.email || !credentials.password) return null;
+      if (!credentials?.email || !credentials.password) {
+        return null //não lança erro
+      };
 
       // Procura o usuário na database
       const user = await prisma.user.findUnique({
         where: { email: credentials.email },
       });
 
-      // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
-      if (!user) return null
+      if (!user) {
+        return null
+      };
 
       // Verifica se a senha passada é igual a senha da database
-      // NENHUM POUCO SEGURO!!!
-      if (credentials.password !== user.password) return null;
+      // `compare` deve ser utilizado caso a senha esteja esteja encriptada
+      const isPasswordValid = await compare(
+        credentials.password,
+        user.password // senha encriptada
+      )
+
+      if (!isPasswordValid) {
+        return null
+      };
 
       // Qualquer objeto retornado será salvo na propriedade user
-      return user
+      return {
+        id: user.id + '',
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        isAdmin: user.isAdmin,
+      }
     }
   })
 ]
@@ -165,9 +183,54 @@ providers: [
 
 ```
 
+!!!warning
+O Next pode tentar carregar o `bcrypt` no client-side! Para que isso não aconteça, especifique no `next.config.js` que essa biblioteca deve permanecer apenas no escopo do server-side:
+
+```js next.config.js
+await import("./src/env.js");
+
+/** @type {import("next").NextConfig} */
+const config = {
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
+  },
+};
+
+export default config;
+```
+
+!!!
+
 !!!
 Você também pode rejeitar este retorno de chamada com um erro, assim o `client-side` pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.
 !!!
+
+Quando você for realizar registro de usuários na sua database, é recomendado que você utilize alguma forma de criptografia para as senhas armazenadas. Uma solução para isso é utilizar bibliotecas como o `bcrypt`, que provê funções de `hash` e `check`.
+
++++ NPM
+
+```bash
+npm install bcrypt
+```
+
++++
+
+```js src/app/server/seed.ts
+import { hash } from "bcrypt";
+import { prisma } from "~/server/db";
+...
+
+const password = "senhaExemplo";
+const encryptedPassword = await hash(password, 12);
+
+const user = await prisma.user.create({
+  email: "test@test.com",
+  name: "testudo",
+  password: encryptedPassword,
+});
+
+...
+```
 
 ## Session
 
@@ -235,6 +298,8 @@ export { handler as GET, handler as POST };
 ```
 
 ### Controle
+
+O NextAuth provê medidas de controle de sessão para que você consiga iniciar e encerrar sessões facilmente. Embora você tenha um conector entre o Prisma e o NextAuth, você precisa implementar a lógica de registro de usuário do zero e criar o User por conta própria na database!
 
 #### SignIn()
 
