@@ -112,6 +112,49 @@ A autenticação por Credenciais permite lidar com o login usando credenciais ar
 
 !!!warning
 É **necessário ter um serviço de autenticação externo, ou criar um do zero**, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como [Lucia Auth](https://lucia-auth.com/).
+
+Por isso, quando você for realizar registro de usuários na sua database, é recomendado que você utilize alguma forma de criptografia para as senhas armazenadas. Uma solução para isso é utilizar bibliotecas como o `bcrypt`, que provê funções de `hash` e `check`.
+
++++ NPM
+
+```bash
+npm install bcrypt
+```
+
++++
+
+```js src/app/server/seed.ts
+import { hash } from "bcrypt";
+import { prisma } from "~/server/db";
+...
+
+const password = "senhaExemplo";
+const encryptedPassword = await hash(password, 12);
+
+const user = await prisma.user.create({
+  email: "test@test.com",
+  name: "testudo",
+  password: encryptedPassword,
+});
+
+...
+```
+
+O Next pode tentar carregar o `bcrypt` no client-side! Para que isso não aconteça, é importante especificar no `next.config.js` que essa biblioteca deve permanecer apenas no escopo do server-side:
+
+```js next.config.js
+await import("./src/env.js");
+
+/** @type {import("next").NextConfig} */
+const config = {
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
+  },
+};
+
+export default config;
+```
+
 !!!
 
 ```js
@@ -183,54 +226,9 @@ providers: [
 
 ```
 
-!!!warning
-O Next pode tentar carregar o `bcrypt` no client-side! Para que isso não aconteça, especifique no `next.config.js` que essa biblioteca deve permanecer apenas no escopo do server-side:
-
-```js next.config.js
-await import("./src/env.js");
-
-/** @type {import("next").NextConfig} */
-const config = {
-  experimental: {
-    serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
-  },
-};
-
-export default config;
-```
-
-!!!
-
 !!!
 Você também pode rejeitar este retorno de chamada com um erro, assim o `client-side` pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.
 !!!
-
-Quando você for realizar registro de usuários na sua database, é recomendado que você utilize alguma forma de criptografia para as senhas armazenadas. Uma solução para isso é utilizar bibliotecas como o `bcrypt`, que provê funções de `hash` e `check`.
-
-+++ NPM
-
-```bash
-npm install bcrypt
-```
-
-+++
-
-```js src/app/server/seed.ts
-import { hash } from "bcrypt";
-import { prisma } from "~/server/db";
-...
-
-const password = "senhaExemplo";
-const encryptedPassword = await hash(password, 12);
-
-const user = await prisma.user.create({
-  email: "test@test.com",
-  name: "testudo",
-  password: encryptedPassword,
-});
-
-...
-```
 
 ## Session
 
