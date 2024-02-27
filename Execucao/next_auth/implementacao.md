@@ -108,7 +108,7 @@ Com as credenciais armazenadas de forma segura em seu arquivo .env, você pode c
 
 ### Credentials (Interno)
 
-A autenticação por Credenciais permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha, ele vem com a restrição de que os usuários autenticados dessa maneira não se mantém no banco de dados e, consequentemente, é necessário o uso de tokens(id) para implementar a validação. Por exemplo:
+A autenticação por Credenciais permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha, ele vem com a restrição de que os usuários autenticados dessa maneira não se mantém no banco de dados e, consequentemente, é necessário o uso de tokens (id) para implementar a validação.
 
 !!!warning
 É **necessário ter um serviço de autenticação externo, ou criar um do zero**, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como [Lucia Auth](https://lucia-auth.com/).
@@ -157,7 +157,9 @@ export default config;
 
 !!!
 
-```js
+Por exemplo:
+
+```js src/app/api/auth/[...nextauth]/route.ts
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "~/server/db";
@@ -265,7 +267,7 @@ export default NextAuth(authOptions);
 
 #### App Router (posterior ao nextjs 13.2)
 
-Nesse caso, crie um arquivo chamado `route.js` na pasta `app/api/auth/[...nextauth]/` e preencha-o com o código a baixo.
+Nesse caso, crie um arquivo chamado `route.js` na pasta `app/api/auth/[...nextauth]/route.ts` e preencha-o com o código a baixo.
 
 ```js
 import NextAuth from "next-auth";
