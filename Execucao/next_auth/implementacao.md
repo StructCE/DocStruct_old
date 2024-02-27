@@ -45,6 +45,130 @@ yarn add next-auth
 
 +++
 
+## Providers
+
+O Next Auth possibilita que o critério de autenticação (provedores) seja por meio de credenciais customizáveis (nome, senha, email, etc) ou por provedores externos (Google, GitHub, Discord, etc).
+
+### OAuth (Externo)
+
+OAuth é o processo de autenticação do NextAuth que utiliza de provedores de login externos preexistentes que dão ao usúario a opção de realizar a autenticação por meio de outra plataforma como Google, Github, Discord, etc.
+
+Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para acessar todos os provedores de autenticação externa suportados pelo NextAuth e suas respectivas documentações clique [Aqui](https://github.com/nextauthjs/next-auth/tree/main/packages/next-auth/src/providers).
+
+Segue um exemplo demonstrativo do Google como provedor OAuth:
+
+```js
+import GoogleProvider from "next-auth/providers/google";
+
+GoogleProvider({
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  profile(profile) {
+    return {
+      // Retorne todas as informações de perfil de que você precisa.
+      // O único campo obrigatório é o 'id'
+      // para ser capaz de identificar a conta quando adicionada a um banco de dados.
+    };
+  },
+});
+```
+
+#### Como conseguir as credenciais para a autenticação externa Next auth (Google)
+
+Utilizarei o exemplo do Google como autenticador externo, pela grande gama de [documentação](https://developers.google.com/identity/protocols/oauth2?hl=pt-br) disponível.
+
+Para configurar a autenticação com o Next Auth usando o Google como provedor, você precisará obter as credenciais apropriadas do Google. Siga estas etapas:
+
+1. Acesse o [Console de Desenvolvedores do Google](https://console.developers.google.com/apis/credentials).
+
+2. Com o projeto criado e/ou adicionado na plataforma, na barra de opções lateral clique no item `Credenciais` e em seguida, no botão `Criar credenciais`, escolha `ID do cliente OAuth` como tipo de credencial, e configure as informações do OAuth de acordo com as necessidades do projeto e seguindo as intruções.
+
+3. Preencha o campo `Tipo de aplicativo` com a opção `Aplicativo da Web`, nas seções `Origens JavaScript autorizadas` e `URLs de redirecionamento autorizados`, adicione URLs de acordo com a natureza do aplicativo, por exemplo, vale colocar `http://localhost:3000` e `http://localhost:3000/api/auth/callback/google` respectivamente, para uma aplicação que está rodando localmente. E , por fim ,clique em `Criar`.
+   OBS:A segunda URL depende de como foram implementadas as rotas no projeto!!
+
+4. Após a criação do cliente OAuth, serão exibidos O `ID do cliente` e a `Chave secreta do cliente`.
+
+5. Por fim, crie um arquivo `.env` para guardar essas informações.Como no exemplo:
+
+```bash
+# Next Auth
+# You can generate a new secret on the command line with:
+# openssl rand -base64 32
+# https://next-auth.js.org/configuration/options#secret
+NEXTAUTH_SECRET="tefsdfadagdsdfagdf123413afadf"
+
+NEXTAUTH_URL="http://localhost:3000"
+
+# Next Auth GOOGLE Provider
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+
+Com as credenciais armazenadas de forma segura em seu arquivo .env, você pode configurar a autenticação com o provedor do Google de maneira segura e eficaz em seu projeto Next Auth.
+
+### Credentials (Interno)
+
+A autenticação por Credenciais permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha, ele vem com a restrição de que os usuários autenticados dessa maneira não se mantém no banco de dados e, consequentemente, é necessário o uso de tokens(id) para implementar a validação. Por exemplo:
+
+!!!warning
+É **necessário ter um serviço de autenticação externo, ou criar um do zero**, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como [Lucia Auth](https://lucia-auth.com/).
+!!!
+
+```js
+
+import CredentialsProvider from "next-auth/providers/credentials";
+...
+providers: [
+  CredentialsProvider({
+    // O nome exibido no formulário de login (por exemplo, 'Entrar com...')
+    name: "Credentials",
+
+    // 'credentials' é usado para gerar um formulário na página de login.
+    // Você pode especificar quais campos devem ser enviados, adicionando chaves ao objeto 'credentials'
+    // por exemplo, domínio, nome de usuário, senha, token de autenticação de dois fatores, etc.
+    // Você pode passar qualquer atributo HTML para a tag <input> por meio do objeto.
+    credentials: {
+      email: {
+        label: "Email",
+        type: "email",
+        placeholder: "exemplo@gmail.com"
+      },
+      password: {
+        label: "Password",
+        type: "password",
+        placeholder: `digite sua senha`,
+      },
+    },
+
+    async authorize(credentials, req) {
+      // Verifica algum campo é vazio
+      if (!credentials?.email || !credentials.password) return null;
+
+      // Procura o usuário na database
+      const user = await prisma.user.findUnique({
+        where: { email: credentials.email },
+      });
+
+      // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
+      if (!user) return null
+
+      // Verifica se a senha passada é igual a senha da database
+      // NENHUM POUCO SEGURO!!!
+      if (credentials.password !== user.password) return null;
+
+      // Qualquer objeto retornado será salvo na propriedade user
+      return user
+    }
+  })
+]
+...
+
+```
+
+!!!
+Você também pode rejeitar este retorno de chamada com um erro, assim o `client-side` pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.
+!!!
+
 ## Session
 
 ### Configuração
@@ -144,7 +268,12 @@ export default function GoogleSignInButton() {
 
 #### Provedor interno
 
-No caso do `crendentials` ou `email` provider, você pode querer lidar com a resposta de login na mesma página e desabilitar o redirecionamento padrão. Por exemplo, se ocorrer um erro (como credenciais incorretas fornecidas pelo usuário), você pode querer tratar o erro na mesma página. Para isso, você pode passar `redirect: false` dentro do segundo parâmetro da função.
+No caso do `crendentials` ou `email` provider, além das opções acima, você tem a possibilidade lidar com a resposta do `SignIn()` na página em que a função é chamada ao **desabilitar seu redirecionamento padrão**. Por exemplo, se ocorrer um erro (como credenciais incorretas fornecidas pelo usuário), você pode querer tratar o erro na mesma página. Para isso, você pode passar `redirect: false` dentro do segundo parâmetro da função.
+
+!!!warning
+A opção de `redirect` só funciona para `credentials` e `email` providers.
+
+!!!
 
 ```js login/page.tsx
 import { signIn, useSession } from "next-auth/react";
@@ -153,13 +282,12 @@ export default function LoginPage() {
   //hook para ter acesso ao resultado do SignIn
   const [signInResponse, setSignInResponse] = useState(null);
   const [password, setPassword] = useState(null);
-  const { data: session, status } = useSession();
 
   const handleSignIn = async () => {
     const response = await signIn("credentials", {
       redirect: false,
-      callbackUrl: "/user/profile",
-      password: password, // passado pelo hook
+      // callbackUrl: "/user/profile",
+      password: password,
     });
     setSignInResponse(response);
   };
@@ -181,6 +309,28 @@ Acesso:
 
 - Server-Side: **NO**
 
+!!!
+
+Quando chamado, o método `signOut()` encerra a sessão e por padrão redireciona o usuário à página inicial (`/`). Como na função de login você pode especificar o `callbackUrl` dentro do segundo parâmetro ou desativar o redirecionamento utilizando `redirect: false`.
+
+```js signOutButton.tsx
+import { signOut } from "next-auth/react";
+
+export default function SignOutButton() {
+  return (
+    <button
+      onClick={() => signOut({ redirect: true, callbackUrl: "/homepage" })}
+    >
+      Sign out
+    </button>
+  );
+}
+```
+
+!!!
+Se após o logout você precisar redirecionar para outra página sem recarregar a atual, você pode capturar a resposta da chamada da função: `const response = await signOut({redirect: false, callbackUrl: "/homepage"})`.
+
+Nessa linha, `response.url` é a URL validada para a qual você pode redirecionar o usuário, usando `useRouter().push(response.url)` do Next.js.
 !!!
 
 ### Fetching
@@ -478,137 +628,35 @@ declare module "next-auth" {
 !!!warning Somente atualizar a interface mais externa não atualiza as demais interfaces que a utilizam. No caso do exemplo acima, será necessário atualizar o `user` dentro de `Session` por conta da tipagem.
 !!!
 
-<!-- ## Autenticação
-
-### SignIn
-
-### SignOut -->
-
 ### SignIn Callback
 
-## Providers
+O `SignIn Callback` é chamado sempre que uma requisição de login é feita a um provedor do NextAuth.
 
-O Next Auth possibilita que o critério de autenticação (provedores) seja por meio de credenciais customizáveis (nome, senha, email, etc) ou por provedores externos (Google, GitHub, Discord, etc).
+Quando você utiliza o NextAuth.js com uma database, o objeto `User` será um objeto da database (id, name, isAdmin, etc.) se o usuário já realizou login anteriormente, senão ele será um protótipo simples.
+Por exemplo, quando o usuário realiza login pelo Google sem conexão com a database, o `session.user` possui os parâmetros _name_, _email_ e _image_.
 
-### OAuth (Externo)
+Já no caso do `Credentials Provider` o objeto `user` será a resposta do `authorize callback` e o objeto `profile` será a resposta do HTTP POST.
 
-OAuth é o processo de autenticação do NextAuth que utiliza de provedores de login externos preexistentes que dão ao usúario a opção de realizar a autenticação por meio de outra plataforma como Google, Github, Discord, etc.
+Você pode utilizar o `signIn() callback` para verificar se um usuário tem permissão para fazer login:
 
-Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para acessar todos os provedores de autenticação externa suportados pelo NextAuth e suas respectivas documentações clique [Aqui](https://github.com/nextauthjs/next-auth/tree/main/packages/next-auth/src/providers).
-
-Segue um exemplo demonstrativo do Google como provedor OAuth:
-
-```js
-import GoogleProvider from "next-auth/providers/google";
-
-GoogleProvider({
-  clientId: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  profile(profile) {
-    return {
-      // Retorne todas as informações de perfil de que você precisa.
-      // O único campo obrigatório é o 'id'
-      // para ser capaz de identificar a conta quando adicionada a um banco de dados.
+```js src/app/api/auth/[...nextauth]/route.ts
+// ...
+callbacks: {
+  async signIn({ user, account, profile, email, credentials }) {
+    // caso em que o NextAuth está conectado com a database
+    if (user.isAdmin) {
+      return true
     };
-  },
-});
-```
-
-#### Como conseguir as credenciais para a autenticação externa Next auth (Google)
-
-Utilizarei o exemplo do Google como autenticador externo, pela grande gama de [documentação](https://developers.google.com/identity/protocols/oauth2?hl=pt-br) disponível.
-
-Para configurar a autenticação com o Next Auth usando o Google como provedor, você precisará obter as credenciais apropriadas do Google. Siga estas etapas:
-
-1. Acesse o [Console de Desenvolvedores do Google](https://console.developers.google.com/apis/credentials).
-
-2. Com o projeto criado e/ou adicionado na plataforma, na barra de opções lateral clique no item `Credenciais` e em seguida, no botão `Criar credenciais`, escolha `ID do cliente OAuth` como tipo de credencial, e configure as informações do OAuth de acordo com as necessidades do projeto e seguindo as intruções.
-
-3. Preencha o campo `Tipo de aplicativo` com a opção `Aplicativo da Web`, nas seções `Origens JavaScript autorizadas` e `URLs de redirecionamento autorizados`, adicione URLs de acordo com a natureza do aplicativo, por exemplo, vale colocar `http://localhost:3000` e `http://localhost:3000/api/auth/callback/google` respectivamente, para uma aplicação que está rodando localmente. E , por fim ,clique em `Criar`.
-   OBS:A segunda URL depende de como foram implementadas as rotas no projeto!!
-
-4. Após a criação do cliente OAuth, serão exibidos O `ID do cliente` e a `Chave secreta do cliente`.
-
-5. Por fim, crie um arquivo `.env` para guardar essas informações.Como no exemplo:
-
-```bash
-# Next Auth
-# You can generate a new secret on the command line with:
-# openssl rand -base64 32
-# https://next-auth.js.org/configuration/options#secret
-NEXTAUTH_SECRET="tefsdfadagdsdfagdf123413afadf"
-
-NEXTAUTH_URL="http://localhost:3000"
-
-# Next Auth GOOGLE Provider
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-```
-
-Com as credenciais armazenadas de forma segura em seu arquivo .env, você pode configurar a autenticação com o provedor do Google de maneira segura e eficaz em seu projeto Next Auth.
-
-### Credentials (Interno)
-
-A autenticação por Credenciais permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha, ele vem com a restrição de que os usuários autenticados dessa maneira não se mantém no banco de dados e, consequentemente, é necessário o uso de tokens(id) para implementar a validação. Por exemplo:
-
-!!!warning
-É **necessário ter um serviço de autenticação externo, ou criar um do zero**, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como [Lucia Auth](https://lucia-auth.com/).
-!!!
-
-```js
-
-import CredentialsProvider from "next-auth/providers/credentials";
-...
-providers: [
-  CredentialsProvider({
-    // O nome exibido no formulário de login (por exemplo, 'Entrar com...')
-    name: "Credentials",
-
-    // 'credentials' é usado para gerar um formulário na página de login.
-    // Você pode especificar quais campos devem ser enviados, adicionando chaves ao objeto 'credentials'
-    // por exemplo, domínio, nome de usuário, senha, token de autenticação de dois fatores, etc.
-    // Você pode passar qualquer atributo HTML para a tag <input> por meio do objeto.
-    credentials: {
-      email: {
-        label: "Email",
-        type: "email",
-        placeholder: "exemplo@gmail.com"
-      },
-      password: {
-        label: "Password",
-        type: "password",
-        placeholder: `digite sua senha`,
-      },
-    },
-
-    async authorize(credentials, req) {
-      // Verifica algum campo é vazio
-      if (!credentials?.email || !credentials.password) return null;
-
-      // Procura o usuário na database
-      const user = await prisma.user.findUnique({
-        where: { email: credentials.email },
-      });
-
-      // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
-      if (!user) return null
-
-      // Verifica se a senha passada é igual a senha da database
-      // NENHUM POUCO SEGURO!!!
-      if (credentials.password !== user.password) return null;
-
-      // Qualquer objeto retornado será salvo na propriedade user
-      return user
+    else {
+      // Você pode retornar uma URL de redirecionamento
+      // Ou pode retornar `false` para mostrar uma mensagem de erro padrão
+      return "/unauthorized"
     }
-  })
-]
-...
 
+  }
+}
+// ...
 ```
-
-!!!
-Você também pode rejeitar este retorno de chamada com um erro, assim o `client-side` pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.
-!!!
 
 ## Proteção de Rotas
 
