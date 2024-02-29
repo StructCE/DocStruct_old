@@ -194,14 +194,27 @@ export default async function AuthLayout({
 
   return (
     <>
-      <SessionProvider>{children}</SessionProvider>;
+      <AuthProvider>{children}</AuthProvider>;
     </>
   );
 }
 ```
 
-Nesse exemplo, temos um grupo de rotas chamado `(user)` que agrupa todas páginas relacionadas ao perfil de um usuário qualquer. O `SessionProvider` engloba o `children`, definindo que para acessar quaisquer uma dessas páginas, uma sessão precisa existir. Ou seja, o usuário deve estar estar logado, senão ele é redirecionado para a página de login.
+Nesse exemplo, temos um grupo de rotas chamado `(user)` que agrupa todas páginas relacionadas ao perfil de um usuário qualquer. O componente `AuthProvider` engloba o `children` para que as páginas tenham acesso a sessão no `client-side`. Além disso, o layout pega o `session` no `server-side` e define que para acessar a rota, uma sessão precisa existir. Ou seja, o usuário deve estar estar logado senão ele é redirecionado para a página de login.
 
+!!!
+Para não ter que usar a diretiva `"use client"` diretamente no arquivo `layout.tsx`, criamos um um componente `AuthProvider` para a utilização do `SessionProvider`.
+
+```js src/components/auth/authProvider.tsx
+"use client";
+import { SessionProvider } from "next-auth/react";
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};
+export default AuthProvider;
+```
+
+!!!
 Dentro do grupo `(user)` podemos ter uma página com rota dinâmica para o perfil do usuário e uma página de login genérica. Nessa página de login, de maneira análoga ao layout, direcionamos o usuário para seu perfil caso ele já esteja logado.
 
 ```js src/app/(user)/login/page.tsx
