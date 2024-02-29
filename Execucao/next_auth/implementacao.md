@@ -3,8 +3,9 @@ order: 1
 icon: file-code
 label: "Utilizando NextAuth em projetos"
 author:
-  - name: João Santos
   - name: Willyan Marques
+    avatar: ../../Imagens DocStruct/Pessoas/gata_do_will.png
+  - name: João Santos
 date: 2024-02-28
 category: Implementação
 tags:
