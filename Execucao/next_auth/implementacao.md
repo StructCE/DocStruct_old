@@ -153,7 +153,7 @@ providers: [
         name: user.name,
         email: user.email,
         image: user.image,
-        isAdmin: user.isAdmin,
+        isAuthorized: user.isAuthorized,
       }
     }
   })
@@ -537,6 +537,8 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+
+    isAuthorized  boolean @default(false) // novo parâmetro
 }
 
 ```
@@ -550,7 +552,7 @@ export const authOptions: NextAuthOptions = {
       ...session, // parâmetros default da session
       user: {     // usuário da session
         ...session.user, // parâmetros default
-        id: user.id      // novo parâmetro para o objeto user da session
+        isAuthorized: user.isAuthorized      // novo parâmetro para o objeto user da session
       },
     }),
   },
@@ -562,13 +564,13 @@ Quando você adicionar esse novo parâmetro ele já será passado dentro da sess
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id: string; // novo parâmetro (session.user.isAdmin)
+      isAuthorized: boolean; // novo parâmetro (session.user.id)
     } & DefaultSession["user"];
   }
 
   // ...novas propriedades
   interface User {
-    id: string; // novo parâmetro
+    isAuthorized: boolean; // novo parâmetro
   }
 }
 ```
@@ -580,27 +582,32 @@ declare module "next-auth" {
 
 O `SignIn Callback` é chamado sempre que uma requisição de login é feita a um provedor do NextAuth.
 
-Quando você utiliza o NextAuth.js com uma database, o objeto `User` será um objeto da database (id, name, isAdmin, etc.) se o usuário já realizou login anteriormente, senão ele será um protótipo simples.
+Quando você utiliza o NextAuth.js com uma database, o objeto `User` será um objeto da database (id, name, isAuthorized, etc.) se o usuário já realizou login anteriormente, senão ele será um protótipo simples.
 Por exemplo, quando o usuário realiza login pelo Google sem conexão com a database, o `session.user` possui os parâmetros _name_, _email_ e _image_.
 
 Já no caso do `Credentials Provider` o objeto `user` será a resposta do `authorize callback` e o objeto `profile` será a resposta do HTTP POST.
 
-Você pode utilizar o `signIn() callback` para verificar se um usuário tem permissão para fazer login:
+Você pode utilizar o `signIn() callback` para, por exemplo, verificar se um usuário tem permissão para fazer login e manejar redirecionamentos:
 
 ```js src/app/api/auth/[...nextauth]/route.ts
 // ...
 callbacks: {
   async signIn({ user, account, profile, email, credentials }) {
-    // caso em que o NextAuth está conectado com a database
-    if (user.isAdmin) {
+    // você precisa fazer a lógica aqui ou pegar da db. Ex:
+    function isAllowedToSignIn(email) {
+      return email.endsWith("@struct.unb.br");
+    }
+
+    if (isAllowedToSignIn(credentials.email)) {
       return true
     };
     else {
       // Você pode retornar uma URL de redirecionamento
-      // Ou pode retornar `false` para mostrar uma mensagem de erro padrão
       return "/unauthorized"
-    }
 
+      // Ou pode retornar `false` para mostrar uma mensagem de erro padrão
+      // return false
+    }
   }
 }
 // ...
