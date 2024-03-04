@@ -58,6 +58,32 @@ Ele é o principal processo de autenticação utilizando por empresas na atualid
 
 Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para ter mais detalhes sobre provedores específicos oferecidos pelo NextAuth acesse suas [respectivas documentações](https://github.com/nextauthjs/next-auth/tree/main/packages/next-auth/src/providers).
 
+Você deve definir os provedores dentro de `authOptions` no arquivo `src/server/auth.ts`
+
+```js src/server/auth.ts
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+
+export const authOptions: NextAuthOptions = {
+  // ...
+  // Configure um ou mais provedores de autenticação
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+
+    // ...adicione mais provedores aqui. Exemplo:
+    // DiscordProvider({
+    //   clientId: env.DISCORD_CLIENT_ID,
+    //   clientSecret: env.DISCORD_CLIENT_SECRET,
+    // }),
+  ],
+};
+
+export default NextAuth(authOptions);
+```
+
 #### Como conseguir as credenciais para a autenticação externa Next auth (Google)
 
 Utilizarei o exemplo do Google como autenticador externo, pela grande gama de [documentação](https://developers.google.com/identity/protocols/oauth2?hl=pt-br) disponível.
@@ -97,13 +123,12 @@ Com as credenciais armazenadas de forma segura em seu arquivo .env, você pode c
 É **necessário ter um serviço de autenticação externo, ou criar um do zero**, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como [Lucia Auth](https://lucia-auth.com/) ou [bcrypt](https://www.npmjs.com/package/bcrypt) para criptografar senhas.
 !!!
 
-O `credentials provider` permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha. A validação de sessão com base no banco de dados deve ser realizada de forma por meio da função `authorize()` na configuração dos providers no NextAuth.
+O `credentials provider` permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha. A validação de sessão com base no banco de dados deve ser realizada de forma manual por meio da função `authorize()` na configuração dos provideFrs no NextAuth.
 
 ```js src/app/api/auth/[...nextauth]/route.ts
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "~/server/db";
-import { compare } from "bcrypt"
 ...
 providers: [
   CredentialsProvider({
@@ -167,105 +192,12 @@ providers: [
 Você também pode rejeitar este retorno de chamada com um erro, assim o `client-side` pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.
 !!!
 
-## Proteção de Rotas
-
-O next oferece a possibilidade da criação de arquivos `layout.tsx` para configuração de páginas que estão dentro de determinadas rotas/pastas.
-
-Além disso, também podemos criar grupos de rotas capazes de ocultar parte dos endereços de acesso para o usuário. Para isso, basta criarmos uma pasta de rota nomeada entre parênteses.
-Por exemplo, podemos separar nossas rotas em dois tipos agrupando todas páginas que necessitam de autenticação em uma única rota `(auth)` e rotas públicas em `(public)`.
-
-Utilizando esses dois recursos juntamente com o NextAuth, podemos criar rotas seguras que agrupam determinadas páginas protegidas por login. Para isso, podemos criar um arquivo `layout.tsx` como no exemplo abaixo:
-
-```js src/app/(user)/layout.tsx
-import { getServerAuthSession } from "~/server/auth";
-import { permanentRedirect } from "next/navigation";
-import { AuthProvider } from "~/components/authProvider";
-
-export default async function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode,
-}) {
-  const session = await getServerAuthSession();
-
-  if (session?.user) {
-    //permanentRedirect não deixa retornar
-    permanentRedirect("/login");
-  }
-
-  return (
-    <>
-      <AuthProvider>{children}</AuthProvider>;
-    </>
-  );
-}
-```
-
-Nesse exemplo, temos um grupo de rotas chamado `(user)` que agrupa todas páginas relacionadas ao perfil de um usuário qualquer. O componente `AuthProvider` engloba o `children` para que as páginas tenham acesso a sessão no `client-side`. Além disso, o layout pega o `session` no `server-side` e define que para acessar a rota, uma sessão precisa existir. Ou seja, o usuário deve estar estar logado senão ele é redirecionado para a página de login.
-
-!!!
-Para não ter que usar a diretiva `"use client"` diretamente no arquivo `layout.tsx`, criamos um um componente `AuthProvider` para a utilização do `SessionProvider`.
-
-```js src/components/auth/authProvider.tsx
-"use client";
-import { SessionProvider } from "next-auth/react";
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  return <SessionProvider>{children}</SessionProvider>;
-};
-export default AuthProvider;
-```
-
-!!!
-Dentro do grupo `(user)` podemos ter uma página com rota dinâmica para o perfil do usuário e uma página de login genérica. Nessa página de login, de maneira análoga ao layout, direcionamos o usuário para seu perfil caso ele já esteja logado.
-
-```js src/app/(user)/login/page.tsx
-import { permanentRedirect } from "next/navigation";
-import SignInButton from "~/components/user/signIn";
-import { getServerAuthSession } from "~/server/auth";
-
-export default async function LoginPage() {
-  const session = await getServerAuthSession();
-
-  if (session?.user) {
-    permanentRedirect(`/profile/${session.user.email}`);
-  }
-
-  return (
-    <>
-      <h1>Página de Login Foda</h1>
-      <SignInButton />
-    </>
-  );
-}
-```
-
-```js src/app/(user)/profile/[email]/page.tsx
-import { getServerAuthSession } from "~/server/auth";
-
-export default async function ProfilePage() {
-  const session = await getServerAuthSession();
-  return (
-    <>
-      <h1>Página do Usuário</h1>
-
-      <span>Meu Nome: {session?.user.name}</span>
-      <span>Meu Email: {session?.user.email}</span>
-      <span>Minha Senha: LOL</span>
-    </>
-  );
-}
-```
-
-!!!
-A página `profile` é acessada a partir de uma rota dinâmica criada a partir do email do usuário na sessão, mas poderia ser feita utilizando outros dados personalizados como um `username`, por exemplo.
-!!!
-
 ## Route Handler
 
 Se você precisa buscar dados do servidor em um `client component`, você pode chamar um `Route Handler` (manipulador de rota).
 Os manipuladores de rota são executados no servidor e retornam os dados para o cliente. Eles devem ser utilizados quando você não quer expor informações confidenciais ao cliente, como tokens.
 
-No caso do NextAuth, temos um handler padrão definido que é executado sempre que a API de autenticação é chamada na rota `api/auth`. Ele é necessário para que o funcionamento das funções `SignIn()`, `SignOut()` entre outras coisas.
+No caso do NextAuth, temos um handler padrão definido que é executado sempre que a API de autenticação é chamada na rota `api/auth`. Ele é necessário para o funcionamento das funções `SignIn()`, `SignOut()` entre outras coisas.
 
 ```js src/app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth/next";
@@ -295,7 +227,7 @@ Caso contário, verifique a versão do Next.js utilizada no projeto e se o tipo 
 O NextAuth provê medidas de controle de sessão para que você consiga iniciar (SignIn) e encerrar (SignOut) sessões facilmente.
 
 !!!warning
-Não existe função SignUp para registro de usuários! Caso você esteja utilizando o `credentials provider` e queira registrar um usuário, você deve fazer isso manualmente
+Não existe função "SignUp" para registro de usuários! Para ambos os tipos de provedores você deve registrar os usuários manualmente. Você pode fazer o controle de login e o registro de usuários a partir do [SignIn Callback](#signin-callback).
 !!!
 
 #### SignIn()
@@ -417,12 +349,12 @@ O `useSession` é um importante hook do React que é utilizado nas aplicações 
 
 O Hook do React `useSession` pode ser usado como uma maneira simples de verificar se alguém está autenticado ou não:
 
-```js src/components/auth/signInButton.tsx
+```js src/components/auth/sessionControlButton.tsx
 "use client";
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const SigninButton = () => {
+const SessionControlButton = () => {
   const { data: session } = useSession(); // hook que pega os dados da sessão
 
   //se não existir a sessão ou o usuário, mostra o botão de login
@@ -439,7 +371,7 @@ const SigninButton = () => {
   }
 };
 
-export default SigninButton;
+export default SessionControlButton;
 ```
 
 A ideia é armazenar os resultados do `useSession` em props para aferir se o usuário ja foi autenticado, assim você pode criar componentes que se comportam de maneiras diferentes caso o usuário esteja logado ou não. Um outro exemplo de uso poderia ser uma foto de perfil de uma foto de perfil de uma navbar que mostra um icone default ou a foto do usuário dependendo da sessão.
@@ -482,39 +414,14 @@ Execução:
 
 !!!
 
-A stack do T3 oferece a função auxiliar `getServerAuthSession` para fazer o pre-fetch da sessão no server-side. Essa função é parecida com a `getServerSession`, mas com a vantagem de que você não precisa importar o `authOptions` toda vez que você precisar realizar um pre-fetch da sessão. Assim como no caso da função do next-auth, os dados da sessão podem ser passados para o client-side por peio do `getServerSideProps`:
+A stack do T3 oferece a função auxiliar `getServerAuthSession` para fazer o pre-fetch da sessão no server-side. Essa função é parecida com a `getServerSession`, mas com a vantagem de que você não precisa importar o `authOptions` toda vez que você precisar realizar um pre-fetch da sessão.
 
 ```js
-import { permanentRedirect } from "next/navigation";
-
-async function getData(ctx) {
-  const session = await getServerAuthSession(ctx);
-  if (!session || !session.user) {
-    permanentRedirect("/login");
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
-
-export async function getServerSideProps(ctx) {
-  const session = await getServerAuthSession(ctx);
-  if (!session || !session.user) {
-    permanentRedirect("/login");
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
+import { getServerAuthSession } from "~/server/auth";
 
 export default function HomePage() {
-  const { data: session } = useSession(); // session já foi pré-processado
-  // NOTE: `session` não possui o status `loading` porque ele é processado no server
-
+  // Use se não estiver usando um provider, caso contrário use useSession()
+  const session = getServerAuthSession();
   return <pre>{JSON.stringify(session.user)}</pre>;
 }
 ```
@@ -538,8 +445,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-
-    isAuthorized  boolean @default(false) // novo parâmetro
+    newParam      String // novo parâmetro
 }
 
 ```
@@ -553,7 +459,7 @@ export const authOptions: NextAuthOptions = {
       ...session, // parâmetros default da session
       user: {     // usuário da session
         ...session.user, // parâmetros default
-        isAuthorized: user.isAuthorized      // novo parâmetro para o objeto user da session
+        newParam: user.newParam      // novo parâmetro para o objeto user da session
       },
     }),
   },
@@ -565,13 +471,13 @@ Quando você adicionar esse novo parâmetro ele já será passado dentro da sess
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      isAuthorized: boolean; // novo parâmetro (session.user.id)
+      newParam: string; // novo parâmetro (session.user.id)
     } & DefaultSession["user"];
   }
 
   // ...novas propriedades
   interface User {
-    isAuthorized: boolean; // novo parâmetro
+    newParam: string; // novo parâmetro
   }
 }
 ```
@@ -595,21 +501,110 @@ Você pode utilizar o `signIn() callback` para, por exemplo, verificar se um usu
 callbacks: {
   async signIn({ user, account, profile, email, credentials }) {
     // você precisa fazer a lógica aqui ou pegar da db. Ex:
-    function isAllowedToSignIn(email) {
-      return email.endsWith("@struct.unb.br");
+    if (email.endsWith("@struct.unb.br")) {
+      return true
     }
 
-    if (isAllowedToSignIn(credentials.email)) {
-      return true
-    };
-    else {
-      // Você pode retornar uma URL de redirecionamento
-      return "/unauthorized"
-
-      // Ou pode retornar `false` para mostrar uma mensagem de erro padrão
-      // return false
+    return "/unauthorized"
+    // Ou pode retornar `false` para mostrar uma mensagem de erro padrão
+    // return false
     }
   }
 }
 // ...
 ```
+
+## Proteção de Rotas
+
+O next oferece a possibilidade da criação de arquivos `layout.tsx` para configuração de páginas que estão dentro de determinadas rotas/pastas.
+
+Além disso, também podemos criar grupos de rotas capazes de ocultar parte dos endereços de acesso para o usuário. Para isso, basta criarmos uma pasta de rota nomeada entre parênteses.
+Por exemplo, podemos separar nossas rotas em dois tipos agrupando todas páginas que necessitam de autenticação em uma única rota `(auth)` e rotas públicas em `(public)`.
+
+Utilizando esses dois recursos juntamente com o NextAuth, podemos criar rotas seguras que agrupam determinadas páginas protegidas por login. Para isso, podemos criar um arquivo `layout.tsx` como no exemplo abaixo:
+
+```js src/app/(user)/layout.tsx
+import { getServerAuthSession } from "~/server/auth";
+import { permanentRedirect } from "next/navigation";
+import { AuthProvider } from "~/components/authProvider";
+
+export default async function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode,
+}) {
+  const session = await getServerAuthSession();
+
+  if (session?.user) {
+    //permanentRedirect não deixa retornar
+    permanentRedirect("/login");
+  }
+
+  return (
+    <>
+      <AuthProvider>{children}</AuthProvider>;
+    </>
+  );
+}
+```
+
+Nesse exemplo, temos um grupo de rotas chamado `(user)` que agrupa todas páginas relacionadas ao perfil de um usuário qualquer. O componente `AuthProvider` engloba o `children` para que as páginas tenham acesso a sessão no `client-side`. Além disso, o layout pega o `session` no `server-side` e define que para acessar a rota, uma sessão precisa existir. Ou seja, o usuário deve estar estar logado senão ele é redirecionado para a página de login.
+
+!!!
+Para não ter que usar a diretiva `"use client"` diretamente no arquivo `layout.tsx`, criamos um um componente `AuthProvider` para a utilização do `SessionProvider`.
+
+```js src/components/auth/authProvider.tsx
+"use client";
+import { SessionProvider } from "next-auth/react";
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};
+export default AuthProvider;
+```
+
+!!!
+Dentro do grupo `(user)` podemos ter uma página em [rota dinâmica](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) para o perfil do usuário `(user)/profile/[email]/page.tsx`.
+
+```js src/app/(user)/profile/[email]/page.tsx
+import { getServerAuthSession } from "~/server/auth";
+
+export default async function ProfilePage() {
+  const session = await getServerAuthSession();
+  return (
+    <>
+      <h1>Página do Usuário</h1>
+
+      <span>Meu Nome: {session?.user.name}</span>
+      <span>Meu Email: {session?.user.email}</span>
+      <span>Minha Senha: LOL</span>
+    </>
+  );
+}
+```
+
+Também podemos criar uma nova rota `(auth)` para páginas relacionadas a autenticação e criar uma página de login `(user)/login/page.tsx`. Nessa página de login, de maneira análoga ao layout, direcionamos o usuário para seu perfil caso ele já esteja logado.
+
+```js src/app/(user)/login/page.tsx
+import { permanentRedirect } from "next/navigation";
+import SessionControlButton from "~/components/user/signIn";
+import { getServerAuthSession } from "~/server/auth";
+
+export default async function LoginPage() {
+  const session = await getServerAuthSession();
+
+  if (session?.user) {
+    permanentRedirect(`/profile/${session.user.email}`);
+  }
+
+  return (
+    <>
+      <h1>Página de Login Foda</h1>
+      <SessionControlButton />
+    </>
+  );
+}
+```
+
+!!!
+A página de perfil é acessada por meio de uma rota dinâmica criada a partir do `email` do usuário na sessão, mas poderia ser feita utilizando outros dados personalizados como um `username`, por exemplo.
+!!!
