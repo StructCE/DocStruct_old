@@ -123,7 +123,7 @@ Com as credenciais armazenadas de forma segura em seu arquivo .env, você pode c
 É **necessário ter um serviço de autenticação externo, ou criar um do zero**, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como [Lucia Auth](https://lucia-auth.com/) ou [bcrypt](https://www.npmjs.com/package/bcrypt) para criptografar senhas.
 !!!
 
-O `credentials provider` permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha. A validação de sessão com base no banco de dados deve ser realizada de forma manual por meio da função `authorize()` na configuração dos provideFrs no NextAuth.
+O `credentials provider` permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha. A validação de sessão com base no banco de dados deve ser realizada de forma manual por meio da função `authorize()` na configuração dos providers no NextAuth.
 
 ```js src/app/api/auth/[...nextauth]/route.ts
 
@@ -227,7 +227,7 @@ Caso contário, verifique a versão do Next.js utilizada no projeto e se o tipo 
 O NextAuth provê medidas de controle de sessão para que você consiga iniciar (SignIn) e encerrar (SignOut) sessões facilmente.
 
 !!!warning
-Não existe função "SignUp" para registro de usuários! Para ambos os tipos de provedores você deve registrar os usuários manualmente. Você pode fazer o controle de login e o registro de usuários a partir do [SignIn Callback](#signin-callback).
+Não existe função "SignUp" para registro de usuários! Usando autenticação externa o SignUp é feito no SignIn caso os dados ainda não estejam no banco de dados, já usando credentials o signUp deve ser feito manualmente. Você pode fazer o controle de login e o registro de usuários a partir do [SignIn Callback](#signin-callback).
 !!!
 
 #### SignIn()
@@ -398,6 +398,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "~/server/auth";
 
 export default async function Page() {
+  // Use se não estiver usando um sessionProvider, caso contrário use useSession()
   const session = await getServerSession(authOptions);
   ...
 }
@@ -420,7 +421,7 @@ A stack do T3 oferece a função auxiliar `getServerAuthSession` para fazer o pr
 import { getServerAuthSession } from "~/server/auth";
 
 export default function HomePage() {
-  // Use se não estiver usando um provider, caso contrário use useSession()
+  // Use se não estiver usando um sessionProvider, caso contrário use useSession()
   const session = getServerAuthSession();
   return <pre>{JSON.stringify(session.user)}</pre>;
 }
