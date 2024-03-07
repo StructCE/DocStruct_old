@@ -56,7 +56,7 @@ OAuth (Open Authorization) é um protocolo de autorização que permite que um a
 
 Ele é o principal processo de autenticação utilizando por empresas na atualidade e é oferecido pelo NextAuth através de provedores de login externos preexistentes. A partir do OAuth, o usúario é capaz de realizar a autenticação por meio de outra plataforma como Google, Github, Discord, etc.
 
-Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para ter mais detalhes sobre provedores específicos oferecidos pelo NextAuth acesse suas [respectivas documentações](https://github.com/nextauthjs/next-auth/tree/main/packages/next-auth/src/providers).
+Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para ter mais detalhes sobre provedores específicos oferecidos pelo NextAuth acesse suas [respectivas documentações](https://next-auth.js.org/providers/).
 
 Você deve definir os provedores dentro de `authOptions` no arquivo `src/server/auth.ts`
 
@@ -106,7 +106,8 @@ Para configurar a autenticação com o Next Auth usando o Google como provedor, 
 # You can generate a new secret on the command line with:
 # openssl rand -base64 32
 # https://next-auth.js.org/configuration/options#secret
-NEXTAUTH_SECRET="tefsdfadagdsdfagdf123413afadf"
+# This variable is necessary for production
+# NEXTAUTH_SECRET=""
 
 NEXTAUTH_URL="http://localhost:3000"
 
@@ -374,7 +375,7 @@ const SessionControlButton = () => {
 export default SessionControlButton;
 ```
 
-A ideia é armazenar os resultados do `useSession` em props para aferir se o usuário ja foi autenticado, assim você pode criar componentes que se comportam de maneiras diferentes caso o usuário esteja logado ou não. Um outro exemplo de uso poderia ser uma foto de perfil de uma foto de perfil de uma navbar que mostra um icone default ou a foto do usuário dependendo da sessão.
+A ideia é armazenar os resultados do `useSession` em props para aferir se o usuário ja foi autenticado, assim você pode criar componentes que se comportam de maneiras diferentes caso o usuário esteja logado ou não. Um outro exemplo de uso poderia ser uma foto de perfil em uma navbar, que mostra um icone default ou a foto do usuário dependendo da sessão.
 
 #### getServerSession()
 
@@ -564,9 +565,9 @@ export default AuthProvider;
 ```
 
 !!!
-Dentro do grupo `(user)` podemos ter uma página em [rota dinâmica](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) para o perfil do usuário `(user)/profile/[email]/page.tsx`.
+Dentro do grupo `(user)`, podemos ter uma página para o perfil do usuário `(user)/profile/page.tsx`.
 
-```js src/app/(user)/profile/[email]/page.tsx
+```js src/app/(user)/profile/page.tsx
 import { getServerAuthSession } from "~/server/auth";
 
 export default async function ProfilePage() {
@@ -583,9 +584,9 @@ export default async function ProfilePage() {
 }
 ```
 
-Também podemos criar uma nova rota `(auth)` para páginas relacionadas a autenticação e criar uma página de login `(user)/login/page.tsx`. Nessa página de login, de maneira análoga ao layout, direcionamos o usuário para seu perfil caso ele já esteja logado.
+Também podemos criar uma nova rota para uma página de login `login/page.tsx`. Nessa página de login, de maneira análoga ao layout, direcionamos o usuário para seu perfil caso ele já esteja logado.
 
-```js src/app/(user)/login/page.tsx
+```js src/app/login/page.tsx
 import { permanentRedirect } from "next/navigation";
 import SessionControlButton from "~/components/user/signIn";
 import { getServerAuthSession } from "~/server/auth";
@@ -605,7 +606,3 @@ export default async function LoginPage() {
   );
 }
 ```
-
-!!!
-A página de perfil é acessada por meio de uma rota dinâmica criada a partir do `email` do usuário na sessão, mas poderia ser feita utilizando outros dados personalizados como um `username`, por exemplo.
-!!!
