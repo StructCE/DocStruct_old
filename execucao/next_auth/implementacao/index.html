@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.755658021956">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.763159161695">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>Instala&#231;&#227;o | DocStruct</title>
-    <meta name="title" content="Instalação | DocStruct">
-    <meta name="description" content="Para adicionar o Next Auth ao projeto basta utilizar o seguinte comando no terminal: yarn add next-auth ">
+    <title>Guia de uso NextAuth com T3 | DocStruct</title>
+    <meta name="title" content="Guia de uso NextAuth com T3 | DocStruct">
+    <meta name="description" content="Para adicionar o NextAuth a um projeto Next.js basta acessar a raiz do repositório pelo terminal e executar um dos comandos abaixo de acordo com o...">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.structej.com/execucao/next_auth/implementacao/">
@@ -19,23 +19,23 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.structej.com/execucao/next_auth/implementacao/">
-    <meta property="og:title" content="Instalação | DocStruct">
-    <meta property="og:description" content="Para adicionar o Next Auth ao projeto basta utilizar o seguinte comando no terminal: yarn add next-auth ">
+    <meta property="og:title" content="Guia de uso NextAuth com T3 | DocStruct">
+    <meta property="og:description" content="Para adicionar o NextAuth a um projeto Next.js basta acessar a raiz do repositório pelo terminal e executar um dos comandos abaixo de acordo com o...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.structej.com/execucao/next_auth/implementacao/">
-    <meta property="twitter:title" content="Instalação | DocStruct">
-    <meta property="twitter:description" content="Para adicionar o Next Auth ao projeto basta utilizar o seguinte comando no terminal: yarn add next-auth ">
+    <meta property="twitter:title" content="Guia de uso NextAuth com T3 | DocStruct">
+    <meta property="twitter:description" content="Para adicionar o NextAuth a um projeto Next.js basta acessar a raiz do repositório pelo terminal e executar um dos comandos abaixo de acordo com o...">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../resources/css/retype.css?v=3.5.0.755658021956" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.5.0.763159161695" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.5.0.755658021956" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.5.0.763159161695" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.5.0.755658021956" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.5.0.755658021956" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.5.0.763159161695" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.5.0.763159161695" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -180,15 +180,22 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="instalação" class="break-words">
+<doc-anchor-target id="guia-de-uso-nextauth-com-t3" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#instalação">#</doc-anchor-trigger>
-        <span>Instalação</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#guia-de-uso-nextauth-com-t3">#</doc-anchor-trigger>
+        <span>Guia de uso NextAuth com T3</span>
     </h1>
 </doc-anchor-target>
 <div class="-mt-3 mb-12 flex flex-wrap text-sm text-gray-400 dark:text-dark-350 items-center">
     <div class="flex items-center">
         <div>Por</div>
+        <div class="ml-2 flex items-center">
+          <div class="shrink-0 w-8 h-8 overflow-hidden rounded-full">
+            <img class="object-cover" src="../../../imagens-docstruct/pessoas/gata_do_will.png">
+          </div>
+          <div class="ml-1 whitespace-nowrap text-gray-500 dark:text-dark-350">Willyan Marques</div>
+        </div>
+        <div>,</div>
         <div class="ml-2 flex items-center">
           <div class="shrink-0 w-8 h-8 overflow-hidden rounded-full">
             <svg width="2rem" height="2rem" xmlns="http://www.w3.org/2000/svg" fill="white"><g><rect width="2rem" height="1.7rem" fill="#c5c5c5"/><circle r="0.44rem" cy="0.83rem" cx="1rem"/><ellipse ry="0.96rem" rx="0.77rem" cy="2.15rem" cx="1rem"/></g></svg>
@@ -200,128 +207,9 @@
     <div>Em&nbsp;</div>
     <div><a href="../../../categories/implementa%C3%A7%C3%A3o/">Implementação</a></div>
     <div class="mx-2">&#9679;</div>
-    <div class="flex items-center shrink-0">Publicado&nbsp;<span>2023-10-27</span></div>
+    <div class="flex items-center shrink-0">Publicado&nbsp;<span>2024-02-28</span></div>
 </div>
 
-<p>Para adicionar o Next Auth ao projeto basta utilizar o seguinte comando no terminal: <code v-pre>yarn add next-auth </code>, ou <code v-pre>pnpm add next-auth  </code> se estiver utilizando o pnpm.</p>
-<doc-anchor-target id="implementação">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#implementação">#</doc-anchor-trigger>
-        <span>Implementação</span>
-    </h1>
-</doc-anchor-target>
-<p>!!Atenção: verifique a versão do Next.js utilizada no projeto e se o tipo de roteamento usado é o <code v-pre>Pages Router</code> ou o <code v-pre>App Router</code>, pois o modo de implementação é diferente.</p>
-<doc-anchor-target id="para-versão-de-nextjs-anterior-à-132">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#para-versão-de-nextjs-anterior-à-132">#</doc-anchor-trigger>
-        <span>Para versão de Next.js anterior à 13.2</span>
-    </h3>
-</doc-anchor-target>
-<p>Para adicionar o NextAuth.js a um projeto, crie um arquivo chamado <code v-pre>[...nextauth].js</code> na pasta <code v-pre>pages/api/auth/</code> e preencha-o com o código a baixo. Este arquivo contém o manipulador de rotas dinâmicas para o NextAuth.js, que também conterá todas as configurações globais do NextAuth.js e todas as solicitações para <code v-pre>/api/auth/*</code> (<code v-pre>signIn</code>, <code v-pre>callback</code>, <code v-pre>signOut</code>, etc.) serão automaticamente tratadas pelo NextAuth.js.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">import NextAuth from &quot;next-auth&quot;;
-import GoogleProvider from &quot;next-auth/providers/google&quot;;
-
-export const authOptions = {
-  // Configure um ou mais provedores de autenticação
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-    }),
-    // ...adicione mais provedores aqui
-  ],
-};
-
-export default NextAuth(authOptions);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="para-versão-de-nextjs-porterior-à-132-com-o-app-router">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#para-versão-de-nextjs-porterior-à-132-com-o-app-router">#</doc-anchor-trigger>
-        <span>Para versão de Next.js porterior à 13.2 com o App Router</span>
-    </h3>
-</doc-anchor-target>
-<p>Nesse caso, crie um arquivo chamado <code v-pre>route.js</code> na pasta <code v-pre>app/api/auth/[...nextauth]/</code> e preencha-o com o código a baixo.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">import NextAuth from &quot;next-auth&quot;;
-
-const handler = NextAuth({
-  // ...adicione mais provedores aqui
-});
-
-export { handler as GET, handler as POST };</code></pre>
-</doc-codeblock></div>
-<p>Exemplo de route.js com GoogleProvider(Google como autenticador):</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">import NextAuth from &quot;next-auth/next&quot;;
-import GoogleProvider from &quot;next-auth/providers/google&quot;;
-
-const handler = NextAuth({
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ,
-    }),
-  ],
-});
-
-export { handler as GET, handler as POST };</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="utilização">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#utilização">#</doc-anchor-trigger>
-        <span>Utilização</span>
-    </h1>
-</doc-anchor-target>
-<doc-anchor-target id="configurando-usesession">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#configurando-usesession">#</doc-anchor-trigger>
-        <span>Configurando useSession</span>
-    </h2>
-</doc-anchor-target>
-<p>O <code v-pre>useSession</code> é um importante hook do React que é utilizado nas aplicações Next Auth para recuperar informações da sessão de usuário.Para utilizá-lo primeiro é preciso expor o conteudo da sessão de usuário por meio do <code v-pre>&lt;SessionProvider /&gt;</code>,para implementá-lo,dentro da pasta <code v-pre>app</code>, crie uma pasta <code v-pre>components</code> e, dentro desta um arquivo <code v-pre>provider.tsx</code> com o seguinte código:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">&quot;use client&quot;;
-import { SessionProvider } from &quot;next-auth/react&quot;;
-import React, { ReactNode } from &quot;react&quot;;
-
-interface Props {
-  children: ReactNode;
-}
-
-const Providers = (props: Props) =&gt; {
-  return &lt;SessionProvider&gt;{props.children}&lt;/SessionProvider&gt;;
-};
-
-export default Providers;</code></pre>
-</doc-codeblock></div>
-<p>Agora, no aqrquivo <code v-pre>layout.tsx</code>, adicione as tags de <code v-pre>&lt;Providers&gt;</code> por fora do elemento <code v-pre>{children}</code> como no exemplo:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">import Providers from &quot;./components/provider&quot;;
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Create Next App',
-  description: 'Generated by create next app',
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    &lt;html lang=&quot;en&quot;&gt;
-      &lt;body className={inter.className}&gt;
-        &lt;Providers&gt;
-          {children}
-        &lt;/Providers&gt;
-      &lt;/body&gt;
-    &lt;/html&gt;
-  )
-};</code></pre>
-</doc-codeblock></div>
-<p>Dessa forma, o <code v-pre>useSession</code> terá acesso aos dados e status da sessão.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -334,108 +222,83 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-            <h5>AVISO!!</h5>
-<p>A desestruturação dos <code v-pre>pageProps</code> em session e no resto das pageProps significa uma alteração no comportamento normal de <code v-pre>getServerSideProps</code> e <code v-pre>getStaticProps</code>.</p>
-<p>Caso pegue a session no servidor e tente passar para a página como suas pageProps, a session será interceptada aqui no App e nunca chegará no seu componente da página. Ao invés disso será usada para alimentar o hook <code v-pre>useSession</code>, portanto use-o.
-Exemplo:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">
-export async function getServerSideProps(ctx) {
-    const session = await getServerSession(ctx.req, ctx.res, authOptions);
-
-    if (!session || !session.user) return { redirect: { permanent: false, destination: &quot;/login&quot; } }
-
-    return {
-        props: {
-            session
-        }
-    }
-}
-
-// Dá erro, e a tipagem é mentirosa:
-export default function HomePage({ session }: InferGetServerSidePropsType&lt;typeof getServerSideProps&gt;) {
-    return &lt;pre&gt;{JSON.stringify(session.user)}&lt;/pre&gt;
-}
-// Dá certo:
-export default function HomePage() {
-    const { data: session } = useSession();
-    return &lt;pre&gt;{JSON.stringify(session.user)}&lt;/pre&gt;
-}
-</code></pre>
-</doc-codeblock></div>
+            <h5><strong>Atenção!! A documentação a seguir assume que você está utilizando o <em>App Router</em> do Next.js</strong></h5>
         </div>
     </div>
 </div>
-<doc-anchor-target id="utilização-do-usesession">
+<doc-anchor-target id="instalação">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#utilização-do-usesession">#</doc-anchor-trigger>
-        <span>Utilização do useSession</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#instalação">#</doc-anchor-trigger>
+        <span>Instalação</span>
     </h2>
 </doc-anchor-target>
-<p>O Hook do React <code v-pre>useSession</code> usado no NextAuth.js é a maneira mais fácil de verificar se alguém está autenticado.Como no exemplo de botão de SignIn:</p>
+<p>Para adicionar o <code v-pre>NextAuth</code> a um projeto <code v-pre>Next.js</code> basta acessar a raiz do repositório pelo terminal e executar um dos comandos abaixo de acordo com o gerenciador de pacotes sendo utilizado:</p>
+<doc-tabs>
+<doc-tab v-cloak id="npm">
+<template #title>NPM</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">&quot;use client&quot;;
-import React from &quot;react&quot;;
-import { signIn, signOut, useSession } from &quot;next-auth/react&quot;;
-const SigninButton = () =&gt; {
-  const { data: session } = useSession();
+<pre class="language-bash"><code v-pre class="language-bash">npm install next-auth</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="pnpm">
+<template #title>PNPM</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">pnpm add next-auth</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="yarn">
+<template #title>YARN</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">yarn add next-auth</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+</doc-tabs>
+<doc-anchor-target id="providers">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#providers">#</doc-anchor-trigger>
+        <span>Providers</span>
+    </h2>
+</doc-anchor-target>
+<p>O Next Auth possibilita que o critério de autenticação (provedores) seja por meio de credenciais customizáveis (nome, senha, email, etc) ou por provedores externos (Google, GitHub, Discord, etc).</p>
+<doc-anchor-target id="oauth-externo">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#oauth-externo">#</doc-anchor-trigger>
+        <span>OAuth (Externo)</span>
+    </h3>
+</doc-anchor-target>
+<p>OAuth (Open Authorization) é um protocolo de autorização que permite que um aplicativo obtenha acesso limitado a uma conta em um serviço de terceiros sem revelar credenciais de login.</p>
+<p>Ele é o principal processo de autenticação utilizando por empresas na atualidade e é oferecido pelo NextAuth através de provedores de login externos preexistentes. A partir do OAuth, o usúario é capaz de realizar a autenticação por meio de outra plataforma como Google, Github, Discord, etc.</p>
+<p>Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para ter mais detalhes sobre provedores específicos oferecidos pelo NextAuth acesse suas <a href="https://next-auth.js.org/providers/">respectivas documentações</a>.</p>
+<p>Você deve definir os provedores dentro de <code v-pre>authOptions</code> no arquivo <code v-pre>src/server/auth.ts</code></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/server/auth.ts</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import NextAuth from &quot;next-auth&quot;;
+import GoogleProvider from &quot;next-auth/providers/google&quot;;
 
-  if (session &amp;&amp; session.user) {
-    return (
-      &lt;div className=&quot;flex gap-4 ml-auto&quot;&gt;
-        &lt;p className=&quot;text-sky-600&quot;&gt;{session.user.name}&lt;/p&gt;
-        &lt;button onClick={() =&gt; signOut()} className=&quot;text-red-600&quot;&gt;
-          Sign Out
-        &lt;/button&gt;
-      &lt;/div&gt;
-    );
-  }
-  return (
-    &lt;button onClick={() =&gt; signIn()} className=&quot;text-green-600 ml-auto&quot;&gt;
-      Sign In
-    &lt;/button&gt;
-  );
+export const authOptions: NextAuthOptions = {
+  // ...
+  // Configure um ou mais provedores de autenticação
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+
+    // ...adicione mais provedores aqui. Exemplo:
+    // DiscordProvider({
+    //   clientId: env.DISCORD_CLIENT_ID,
+    //   clientSecret: env.DISCORD_CLIENT_SECRET,
+    // }),
+  ],
 };
 
-export default SigninButton;</code></pre>
+export default NextAuth(authOptions);</code></pre>
 </doc-codeblock></div>
-<p>A ideia é armazenar os resultados do <code v-pre>useSession</code> em props para aferir se o usuário ja foi autenticado.</p>
-<doc-anchor-target id="autenticação">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#autenticação">#</doc-anchor-trigger>
-        <span>Autenticação</span>
-    </h1>
-</doc-anchor-target>
-<p>O Next Auth possibilita que o critério de autenticação(provedores) seja por meio de credenciais (nome,senha), email ou autenticações externas(google,GitHub,etc.).</p>
-<doc-anchor-target id="oauth">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#oauth">#</doc-anchor-trigger>
-        <span>OAuth</span>
-    </h2>
-</doc-anchor-target>
-<p>OAuth é o processo de autenticação do NextAuth que utiliza de processos de login externos preexistentes, ou seja, dá ao usúario a opção de realizar a autenticação por outra plataforma como Github, Google, Twitter, etc.</p>
-<p>Por serem processos externos de várias fontes diferentes, cada autenticação escolhida terá uma documentação específica diferente. Para acessar todos os provedores de autenticação externa suportados pelo NextAuth e suas respectivas documentações clique <a href="https://github.com/nextauthjs/next-auth/tree/main/packages/next-auth/src/providers">Aqui</a>.</p>
-<p>Segue um exemplo demonstrativo do Google como provedor OAuth:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">import GoogleProvider from &quot;next-auth/providers/google&quot;;
-
-GoogleProvider({
-  clientId: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  profile(profile) {
-    return {
-      // Retorne todas as informações de perfil de que você precisa.
-      // O único campo obrigatório é o 'id'
-      // para ser capaz de identificar a conta quando adicionada a um banco de dados.
-    };
-  },
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="como-conseguir-as-credenciais-para-a-autenticação-externa-next-authgoogle">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#como-conseguir-as-credenciais-para-a-autenticação-externa-next-authgoogle">#</doc-anchor-trigger>
-        <span>Como conseguir as credenciais para a autenticação externa Next auth(Google)</span>
-    </h2>
+<doc-anchor-target id="como-conseguir-as-credenciais-para-a-autenticação-externa-next-auth-google">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#como-conseguir-as-credenciais-para-a-autenticação-externa-next-auth-google">#</doc-anchor-trigger>
+        <span>Como conseguir as credenciais para a autenticação externa Next auth (Google)</span>
+    </h4>
 </doc-anchor-target>
 <p>Utilizarei o exemplo do Google como autenticador externo, pela grande gama de <a href="https://developers.google.com/identity/protocols/oauth2?hl=pt-br">documentação</a> disponível.</p>
 <p>Para configurar a autenticação com o Next Auth usando o Google como provedor, você precisará obter as credenciais apropriadas do Google. Siga estas etapas:</p>
@@ -457,7 +320,8 @@ OBS:A segunda URL depende de como foram implementadas as rotas no projeto!!</p>
 # You can generate a new secret on the command line with:
 # openssl rand -base64 32
 # https://next-auth.js.org/configuration/options#secret
-NEXTAUTH_SECRET=&quot;tefsdfadagdsdfagdf123413afadf&quot;
+# This variable is necessary for production
+# NEXTAUTH_SECRET=&quot;&quot;
 
 NEXTAUTH_URL=&quot;http://localhost:3000&quot;
 
@@ -466,13 +330,12 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=</code></pre>
 </doc-codeblock></div>
 <p>Com as credenciais armazenadas de forma segura em seu arquivo .env, você pode configurar a autenticação com o provedor do Google de maneira segura e eficaz em seu projeto Next Auth.</p>
-<doc-anchor-target id="credenciais">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#credenciais">#</doc-anchor-trigger>
-        <span>Credenciais</span>
-    </h2>
+<doc-anchor-target id="credentials-interno">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#credentials-interno">#</doc-anchor-trigger>
+        <span>Credentials (Interno)</span>
+    </h3>
 </doc-anchor-target>
-<p>A autenticação por Credenciais permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha, ele vem com a restrição de que os usuários autenticados dessa maneira não se mantém no banco de dados e, consequentemente, é necessário o uso de tokens(id) para implementar a validação. Por exemplo:</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -485,38 +348,67 @@ GOOGLE_CLIENT_SECRET=</code></pre>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>É <strong>necessário</strong> ter um serviço de <strong>autenticação externo</strong>, <strong>ou criar</strong> um <strong>do zero</strong>, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como <a href="https://lucia-auth.com/">Lucia Auth</a>.</p>
+<p>É <strong>necessário ter um serviço de autenticação externo, ou criar um do zero</strong>, para poder usar o CredentialsProvider de forma realmente útil! O NextAuth nesse caso é muito menos útil! Considere recorrer a outras bibliotecas, como <a href="https://lucia-auth.com/">Lucia Auth</a> ou <a href="https://www.npmjs.com/package/bcrypt">bcrypt</a> para criptografar senhas.</p>
         </div>
     </div>
 </div>
+<p>O <code v-pre>credentials provider</code> permite lidar com o login usando credenciais arbitrárias, como nome de usuário e senha. A validação de sessão com base no banco de dados deve ser realizada de forma manual por meio da função <code v-pre>authorize()</code> na configuração dos providers no NextAuth.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/app/api/auth/[...nextauth]/route.ts</div>
 <pre class="language-javascript"><code v-pre class="language-javascript">
 import CredentialsProvider from &quot;next-auth/providers/credentials&quot;;
+import { prisma } from &quot;~/server/db&quot;;
 ...
 providers: [
   CredentialsProvider({
     // O nome exibido no formulário de login (por exemplo, 'Entrar com...')
     name: &quot;Credentials&quot;,
+
     // 'credentials' é usado para gerar um formulário na página de login.
     // Você pode especificar quais campos devem ser enviados, adicionando chaves ao objeto 'credentials'
     // por exemplo, domínio, nome de usuário, senha, token de autenticação de dois fatores, etc.
     // Você pode passar qualquer atributo HTML para a tag &lt;input&gt; por meio do objeto.
     credentials: {
-      username: { label: &quot;Username&quot;, type: &quot;text&quot;, placeholder: &quot;jsmith&quot; },
-      password: { label: &quot;Password&quot;, type: &quot;password&quot; }
+      email: {
+        label: &quot;Email&quot;,
+        type: &quot;email&quot;,
+        placeholder: &quot;exemplo@gmail.com&quot;
+      },
+      password: {
+        label: &quot;Password&quot;,
+        type: &quot;password&quot;,
+        placeholder: `digite sua senha`,
+      },
     },
+
     async authorize(credentials, req) {
-      // Adicione parâmetros aqui para procurar o usuário com base nas credenciais fornecidas.
-      const user = { id: &quot;1&quot;, name: &quot;J Smith&quot;, email: &quot;jsmith@example.com&quot; }
+      // Verifica algum campo é vazio
+      if (!credentials?.email || !credentials.password) {
+        return null //não lança erro
+      };
 
-      if (user) {
-        // Qualquer objeto retornado será salvo na propriedade user
-        return user
-      } else {
-        // Se você retornar null, um erro será exibido, aconselhando o usuário a verificar seus dados.
+      // Procura o usuário na database
+      const user = await prisma.user.findUnique({
+        where: { email: credentials.email },
+      });
+
+      if (!user) {
         return null
+      };
 
-        // Você também pode rejeitar este retorno de chamada com um erro, assim o usuário será redirecionado para a página de erro com a mensagem de erro como um parâmetro de consulta
+      // Compara a senha passada com a senha do bd
+      // PERIGO!!! Senha do bd não está criptografada!
+      if (credentials.password !== user.password) {
+        return null
+      };
+
+      // Qualquer objeto retornado será salvo na propriedade user
+      return {
+        id: user.id + '',
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        isAuthorized: user.isAuthorized,
       }
     }
   })
@@ -524,20 +416,635 @@ providers: [
 ...
 </code></pre>
 </doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Você também pode rejeitar este retorno de chamada com um erro, assim o <code v-pre>client-side</code> pode lidar com o erro dependendo do status e da mensagem passada como um parâmetro de consulta. No tratamento desse erro o usuário pode, por exemplo, receber um aviso ou ser redirecionado para uma página de registro, ajuda, etc.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="route-handler">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#route-handler">#</doc-anchor-trigger>
+        <span>Route Handler</span>
+    </h2>
+</doc-anchor-target>
+<p>Se você precisa buscar dados do servidor em um <code v-pre>client component</code>, você pode chamar um <code v-pre>Route Handler</code> (manipulador de rota).
+Os manipuladores de rota são executados no servidor e retornam os dados para o cliente. Eles devem ser utilizados quando você não quer expor informações confidenciais ao cliente, como tokens.</p>
+<p>No caso do NextAuth, temos um handler padrão definido que é executado sempre que a API de autenticação é chamada na rota <code v-pre>api/auth</code>. Ele é necessário para o funcionamento das funções <code v-pre>SignIn()</code>, <code v-pre>SignOut()</code> entre outras coisas.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/app/api/auth/[...nextauth]/route.ts</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import NextAuth from &quot;next-auth/next&quot;;
+import { authOptions } from &quot;~/server/auth&quot;;
+
+const handler = NextAuth(authOptions);
+
+// você pode adicionar mais exports compatíveis
+export { handler as GET, handler as POST };</code></pre>
+</doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Projetos criados a partir da stack do T3 separam o <code v-pre>authOptions</code> do <code v-pre>route handler</code> por questão de organização e modularidade. Para saber mais sobre a configuração NextAuth acesse a <a href="https://next-auth.js.org/configuration/options#options">documentação do authOptions</a>. Veja também um exemplo de uso em <doc-anchor-trigger to="#session-callback">Session Callback</doc-anchor-trigger></p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="session">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#session">#</doc-anchor-trigger>
+        <span>Session</span>
+    </h2>
+</doc-anchor-target>
+<!-- !!!warning **Atenção:**
+
+Caso você tenha criado o projeto utilizando a **stack do T3** _não é necessário_ configurar o nextauth manualmente.
+
+Caso contário, verifique a versão do Next.js utilizada no projeto e se o tipo de roteamento usado é o `Pages Router` ou o `App Router`, pois o modo de implementação é diferente.
+!!! -->
+<doc-anchor-target id="controle">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#controle">#</doc-anchor-trigger>
+        <span>Controle</span>
+    </h3>
+</doc-anchor-target>
+<p>O NextAuth provê medidas de controle de sessão para que você consiga iniciar (SignIn) e encerrar (SignOut) sessões facilmente.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-yellow-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Não existe função &quot;SignUp&quot; para registro de usuários! Usando autenticação externa o SignUp é feito no SignIn caso os dados ainda não estejam no banco de dados, já usando credentials o signUp deve ser feito manualmente. Você pode fazer o controle de login e o registro de usuários a partir do <doc-anchor-trigger to="#signin-callback">SignIn Callback</doc-anchor-trigger>.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="signin">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#signin">#</doc-anchor-trigger>
+        <span>SignIn()</span>
+    </h4>
+</doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Execução:</p>
+<ul>
+<li><p>Client-Side: <strong>YES</strong></p>
+</li>
+<li><p>Server-Side: <strong>NO</strong></p>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+<p>Por padrão, ao chamar o método <code v-pre>signIn()</code> sem argumentos, você será redirecionado para a página de login do NextAuth dentro da rota <code v-pre>/api/auth/session</code>. Essa página possui uma interface básica que lista todos os provedores de autenticação inseridos no <code v-pre>authOptions</code>, mas não pode ser personalizada e expõe a rota api ao usuário.</p>
+<doc-anchor-target id="provedor-externo">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#provedor-externo">#</doc-anchor-trigger>
+        <span>Provedor externo</span>
+    </h5>
+</doc-anchor-target>
+<p>Você pode redirecionar o usuário diretamente para a página seu provedor de autenticação externo passando o <code v-pre>id</code> do provedor dentro de <code v-pre>signIn()</code>.
+Além disso, você pode especificar para qual página o usuário irá retornar após o login passando uma Url no segundo argumento da função.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">googleSignInButton.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { signIn } from &quot;next-auth/react&quot;;
+
+export default function GoogleSignInButton() {
+  return (
+    &lt;button
+      onClick={() =&gt; signIn(&quot;google&quot;, { callbackUrl: &quot;/user/profile&quot; });
+      }
+    &gt;
+      Sign in with Google
+    &lt;/button&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="provedor-interno">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#provedor-interno">#</doc-anchor-trigger>
+        <span>Provedor interno</span>
+    </h4>
+</doc-anchor-target>
+<p>No caso do <code v-pre>crendentials</code> ou <code v-pre>email</code> provider, além das opções acima, você tem a possibilidade lidar com a resposta do <code v-pre>SignIn()</code> na <strong>sua própria página de login/cadastro</strong> em que a função é chamada ao <strong>desabilitar seu redirecionamento padrão</strong>. Por exemplo, se ocorrer um erro (como credenciais incorretas fornecidas pelo usuário), você pode querer tratar o erro na mesma página. Para isso, você pode passar <code v-pre>redirect: false</code> dentro do segundo parâmetro da função.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-yellow-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>A opção de <code v-pre>redirect</code> só funciona para <code v-pre>credentials</code> e <code v-pre>email</code> providers.</p>
+        </div>
+    </div>
+</div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">login/page.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { signIn, useSession } from &quot;next-auth/react&quot;;
+import { useState } from &quot;react&quot;;
+export default function LoginPage() {
+  //hook para ter acesso ao resultado do SignIn
+  const [signInResponse, setSignInResponse] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const handleSignIn = async () =&gt; {
+    const response = await signIn(&quot;credentials&quot;, {
+      redirect: false,
+      // callbackUrl: &quot;/user/profile&quot;,
+      password: password,
+    });
+    setSignInResponse(response);
+  };
+
+  // Formulário de login
+  // ...
+  // ...
+  // Botão de login:
+  &lt;button onClick={handleSignIn}&gt;Sign in&lt;/button&gt;;
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="signout">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#signout">#</doc-anchor-trigger>
+        <span>SignOut()</span>
+    </h4>
+</doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Execução:</p>
+<ul>
+<li><p>Client-Side: <strong>YES</strong></p>
+</li>
+<li><p>Server-Side: <strong>NO</strong></p>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+<p>Quando chamado, o método <code v-pre>signOut()</code> encerra a sessão e por padrão redireciona o usuário à página inicial (<code v-pre>/</code>). Como na função de login você pode especificar o <code v-pre>callbackUrl</code> dentro do segundo parâmetro ou desativar o redirecionamento utilizando <code v-pre>redirect: false</code>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">signOutButton.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { signOut } from &quot;next-auth/react&quot;;
+
+export default function SignOutButton() {
+  return (
+    &lt;button
+      onClick={() =&gt; signOut({ redirect: true, callbackUrl: &quot;/homepage&quot; })}
+    &gt;
+      Sign out
+    &lt;/button&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Se após o logout você precisar redirecionar para outra página sem recarregar a atual, você pode capturar a resposta da chamada da função: <code v-pre>const response = await signOut({redirect: false, callbackUrl: &quot;/homepage&quot;})</code>.</p>
+<p>Nessa linha, <code v-pre>response.url</code> é a URL validada para a qual você pode redirecionar o usuário, usando <code v-pre>useRouter().push(response.url)</code> do Next.js.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="session-fetching">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#session-fetching">#</doc-anchor-trigger>
+        <span>Session Fetching</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="usesession">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#usesession">#</doc-anchor-trigger>
+        <span>useSession()</span>
+    </h4>
+</doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Execução:</p>
+<ul>
+<li><p>Client-Side: <strong>YES</strong></p>
+</li>
+<li><p>Server-Side: <strong>NO</strong></p>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+<p>O <code v-pre>useSession</code> é um importante hook do React que é utilizado nas aplicações Next Auth para recuperar informações da sessão de usuário. Para utilizá-lo primeiro é preciso expor o conteudo da sessão de usuário por meio do <code v-pre>&lt;SessionProvider&gt;</code>. Para saber como utilizar o <code v-pre>SessionProvider</code>, vá para a seção <doc-anchor-trigger to="#prote%C3%A7%C3%A3o-de-rotas">Proteção de Rotas</doc-anchor-trigger>.</p>
+<doc-anchor-target id="exemplo">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#exemplo">#</doc-anchor-trigger>
+        <span>Exemplo</span>
+    </h5>
+</doc-anchor-target>
+<p>O Hook do React <code v-pre>useSession</code> pode ser usado como uma maneira simples de verificar se alguém está autenticado ou não:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/components/auth/sessionControlButton.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">&quot;use client&quot;;
+import React from &quot;react&quot;;
+import { signIn, signOut, useSession } from &quot;next-auth/react&quot;;
+
+const SessionControlButton = () =&gt; {
+  const { data: session } = useSession(); // hook que pega os dados da sessão
+
+  //se não existir a sessão ou o usuário, mostra o botão de login
+  if (!session || !session.user) {
+    return &lt;button onClick={() =&gt; signIn()}&gt;Sign In&lt;/button&gt;;
+  } else {
+    //caso contrário, mostra os dados e a opção de SignOut
+    return (
+      &lt;div&gt;
+        &lt;p&gt;{session.user.name}&lt;/p&gt;
+        &lt;button onClick={() =&gt; signOut()}&gt;Sign Out&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+};
+
+export default SessionControlButton;</code></pre>
+</doc-codeblock></div>
+<p>A ideia é armazenar os resultados do <code v-pre>useSession</code> em props para aferir se o usuário ja foi autenticado, assim você pode criar componentes que se comportam de maneiras diferentes caso o usuário esteja logado ou não. Um outro exemplo de uso poderia ser uma foto de perfil em uma navbar, que mostra um icone default ou a foto do usuário dependendo da sessão.</p>
+<doc-anchor-target id="getserversession">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#getserversession">#</doc-anchor-trigger>
+        <span>getServerSession()</span>
+    </h4>
+</doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Acesso:</p>
+<ul>
+<li><p>Client-Side: <strong>NO</strong></p>
+</li>
+<li><p>Server-Side: <strong>YES</strong></p>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+<p>Como o nome já diz, o <code v-pre>getServerSession</code> é utilizado para obter a sessão no <code v-pre>server-side</code>, fazendo os fetches e renderizações no servidor antes de serem passados para o usuário. Geralmente ele é utilizando em contextos de <code v-pre>Route Handlers</code>, <code v-pre>React Server Components</code>, <code v-pre>rotas API</code> ou no <code v-pre>getServerSideProps</code></p>
+<doc-anchor-target id="exemplo-app-router">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#exemplo-app-router">#</doc-anchor-trigger>
+        <span>Exemplo (App Router)</span>
+    </h5>
+</doc-anchor-target>
+<p>Para pegar os dados no server side dentro das páginas no <code v-pre>App Router</code>, você precisa importar o <code v-pre>authOptions</code> e passar dentro da função.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { getServerSession } from &quot;next-auth/next&quot;;
+import { authOptions } from &quot;~/server/auth&quot;;
+
+export default async function Page() {
+  // Use se não estiver usando um sessionProvider, caso contrário use useSession()
+  const session = await getServerSession(authOptions);
+  ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="getserverauthsession-t3-stack">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#getserverauthsession-t3-stack">#</doc-anchor-trigger>
+        <span>getServerAuthSession() [<em>T3 stack</em>]</span>
+    </h4>
+</doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Execução:</p>
+<ul>
+<li><p>Client-Side: <strong>NO</strong></p>
+</li>
+<li><p>Server-Side: <strong>YES</strong></p>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+<p>A stack do T3 oferece a função auxiliar <code v-pre>getServerAuthSession</code> para fazer o pre-fetch da sessão no server-side. Essa função é parecida com a <code v-pre>getServerSession</code>, mas com a vantagem de que você não precisa importar o <code v-pre>authOptions</code> toda vez que você precisar realizar um pre-fetch da sessão.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { getServerAuthSession } from &quot;~/server/auth&quot;;
+
+export default function HomePage() {
+  // Use se não estiver usando um sessionProvider, caso contrário use useSession()
+  const session = getServerAuthSession();
+  return &lt;pre&gt;{JSON.stringify(session.user)}&lt;/pre&gt;;
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="callbacks">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#callbacks">#</doc-anchor-trigger>
+        <span>Callbacks</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="session-callback">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#session-callback">#</doc-anchor-trigger>
+        <span>Session Callback</span>
+    </h3>
+</doc-anchor-target>
+<p>O <code v-pre>session callback</code> é chamado sempre que uma sessão é verificada (<code v-pre>getSession()</code>, <code v-pre>getServerSession()</code>, <code v-pre>/api/auth/session</code>, etc).</p>
+<p><strong>Por padrão, apenas uma parte do token é retornado como medida de segurança</strong>, mas podemos facilmente personalizar quais dados de sessão são retornados. Para isso, a stack do T3 traz uma conexão pronta entre a sessão e a database a partir da model <code v-pre>User</code> definida no Prisma e com isso podemos passar parâmetros extras e acessá-los utilizando os <code v-pre>fetches</code> de sessão no <code v-pre>client-side</code>.</p>
+<p>Podemos também passar parâmetros extras retirados da database e passá-los junto com os dados de sessão padrão (dependem do <code v-pre>Session Provider</code>, no caso do google são <code v-pre>email</code>, <code v-pre>name</code> e <code v-pre>image</code>)</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-go"><code v-pre class="language-go">model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    accounts      Account[]
+    sessions      Session[]
+    newParam      String // novo parâmetro
+}
+</code></pre>
+</doc-codeblock></div>
+<p>Para fazer com que o session inclua esse novo parâmetro, basta ir no arquivo de configurações do NextAuth em <code v-pre>src/server/auth.ts</code> e adicionar esse parâmetro ao <code v-pre>session callback</code> do <code v-pre>authOptions</code>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">export const authOptions: NextAuthOptions = {
+  callbacks: {
+    session: ({ session, user }) =&gt; ({
+      ...session, // parâmetros default da session
+      user: {     // usuário da session
+        ...session.user, // parâmetros default
+        newParam: user.newParam      // novo parâmetro para o objeto user da session
+      },
+    }),
+  },</code></pre>
+</doc-codeblock></div>
+<p>Quando você adicionar esse novo parâmetro ele já será passado dentro da sessão, mas o typescript apontará um erro de tipagem não segura. Para corrigir será necessário declarar uma nova interface para o user object da sessão no módulo <code v-pre>next-auth</code>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">declare module &quot;next-auth&quot; {
+  interface Session extends DefaultSession {
+    user: {
+      newParam: string; // novo parâmetro (session.user.id)
+    } &amp; DefaultSession[&quot;user&quot;];
+  }
+
+  // ...novas propriedades
+  interface User {
+    newParam: string; // novo parâmetro
+  }
+}</code></pre>
+</doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-yellow-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Somente atualizar a interface mais externa não atualiza as demais interfaces que a utilizam. No caso do exemplo acima, será necessário atualizar o <code v-pre>user</code> dentro de <code v-pre>Session</code> por conta da tipagem.</h5>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="signin-callback">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#signin-callback">#</doc-anchor-trigger>
+        <span>SignIn Callback</span>
+    </h3>
+</doc-anchor-target>
+<p>O <code v-pre>SignIn Callback</code> é chamado sempre que uma requisição de login é feita a um provedor do NextAuth.</p>
+<p>Quando você utiliza o NextAuth.js com uma database, o objeto <code v-pre>User</code> será um objeto da database (id, name, isAuthorized, etc.) se o usuário já realizou login anteriormente, senão ele será um protótipo simples.
+Por exemplo, quando o usuário realiza login pelo Google sem conexão com a database, o <code v-pre>session.user</code> possui os parâmetros <em>name</em>, <em>email</em> e <em>image</em>.</p>
+<p>Já no caso do <code v-pre>Credentials Provider</code> o objeto <code v-pre>user</code> será a resposta do <code v-pre>authorize callback</code> e o objeto <code v-pre>profile</code> será a resposta do HTTP POST.</p>
+<p>Você pode utilizar o <code v-pre>signIn() callback</code> para, por exemplo, verificar se um usuário tem permissão para fazer login e manejar redirecionamentos:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/app/api/auth/[...nextauth]/route.ts</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">// ...
+callbacks: {
+  async signIn({ user, account, profile, email, credentials }) {
+    // você precisa fazer a lógica aqui ou pegar da db. Ex:
+    if (email.endsWith(&quot;@struct.unb.br&quot;)) {
+      return true
+    }
+
+    return &quot;/unauthorized&quot;
+    // Ou pode retornar `false` para mostrar uma mensagem de erro padrão
+    // return false
+    }
+  }
+}
+// ...</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="proteção-de-rotas">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#proteção-de-rotas">#</doc-anchor-trigger>
+        <span>Proteção de Rotas</span>
+    </h2>
+</doc-anchor-target>
+<p>O next oferece a possibilidade da criação de arquivos <code v-pre>layout.tsx</code> para configuração de páginas que estão dentro de determinadas rotas/pastas.</p>
+<p>Além disso, também podemos criar grupos de rotas capazes de ocultar parte dos endereços de acesso para o usuário. Para isso, basta criarmos uma pasta de rota nomeada entre parênteses.
+Por exemplo, podemos separar nossas rotas em dois tipos agrupando todas páginas que necessitam de autenticação em uma única rota <code v-pre>(auth)</code> e rotas públicas em <code v-pre>(public)</code>.</p>
+<p>Utilizando esses dois recursos juntamente com o NextAuth, podemos criar rotas seguras que agrupam determinadas páginas protegidas por login. Para isso, podemos criar um arquivo <code v-pre>layout.tsx</code> como no exemplo abaixo:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/app/(user)/layout.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { getServerAuthSession } from &quot;~/server/auth&quot;;
+import { permanentRedirect } from &quot;next/navigation&quot;;
+import { AuthProvider } from &quot;~/components/authProvider&quot;;
+
+export default async function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode,
+}) {
+  const session = await getServerAuthSession();
+
+  if (session?.user) {
+    //permanentRedirect não deixa retornar
+    permanentRedirect(&quot;/login&quot;);
+  }
+
+  return (
+    &lt;&gt;
+      &lt;AuthProvider&gt;{children}&lt;/AuthProvider&gt;;
+    &lt;/&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
+<p>Nesse exemplo, temos um grupo de rotas chamado <code v-pre>(user)</code> que agrupa todas páginas relacionadas ao perfil de um usuário qualquer. O componente <code v-pre>AuthProvider</code> engloba o <code v-pre>children</code> para que as páginas tenham acesso a sessão no <code v-pre>client-side</code>. Além disso, o layout pega o <code v-pre>session</code> no <code v-pre>server-side</code> e define que para acessar a rota, uma sessão precisa existir. Ou seja, o usuário deve estar estar logado senão ele é redirecionado para a página de login.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Para não ter que usar a diretiva <code v-pre>&quot;use client&quot;</code> diretamente no arquivo <code v-pre>layout.tsx</code>, criamos um um componente <code v-pre>AuthProvider</code> para a utilização do <code v-pre>SessionProvider</code>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/components/auth/authProvider.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">&quot;use client&quot;;
+import { SessionProvider } from &quot;next-auth/react&quot;;
+const AuthProvider = ({ children }: { children: React.ReactNode }) =&gt; {
+  return &lt;SessionProvider&gt;{children}&lt;/SessionProvider&gt;;
+};
+export default AuthProvider;</code></pre>
+</doc-codeblock></div>
+        </div>
+    </div>
+</div>
+<p>Dentro do grupo <code v-pre>(user)</code>, podemos ter uma página para o perfil do usuário <code v-pre>(user)/profile/page.tsx</code>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/app/(user)/profile/page.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { getServerAuthSession } from &quot;~/server/auth&quot;;
+
+export default async function ProfilePage() {
+  const session = await getServerAuthSession();
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Página do Usuário&lt;/h1&gt;
+
+      &lt;span&gt;Meu Nome: {session?.user.name}&lt;/span&gt;
+      &lt;span&gt;Meu Email: {session?.user.email}&lt;/span&gt;
+      &lt;span&gt;Minha Senha: LOL&lt;/span&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
+<p>Também podemos criar uma nova rota para uma página de login <code v-pre>login/page.tsx</code>. Nessa página de login, de maneira análoga ao layout, direcionamos o usuário para seu perfil caso ele já esteja logado.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">src/app/login/page.tsx</div>
+<pre class="language-javascript"><code v-pre class="language-javascript">import { permanentRedirect } from &quot;next/navigation&quot;;
+import SessionControlButton from &quot;~/components/user/signIn&quot;;
+import { getServerAuthSession } from &quot;~/server/auth&quot;;
+
+export default async function LoginPage() {
+  const session = await getServerAuthSession();
+
+  if (session?.user) {
+    permanentRedirect(`/profile/${session.user.email}`);
+  }
+
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Página de Login Foda&lt;/h1&gt;
+      &lt;SessionControlButton /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+</doc-codeblock></div>
 
                                 <div class="flex items-center mt-6 mb-6 clear-both">
                                     <span>
                                         <a href="../../../tags/">
                                             <svg class="inline-block -mb-px mr-1.5 text-blue-500 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" overflow="visible" fill="currentColor"><g><path d="M21.3 9.88l-8.59-8.59C12.52 1.11 12.27 1 12 1H2c-.55 0-1 .45-1 1v10c0 .27.11.52.29.71l8.59 8.58c.57.57 1.32.88 2.12.88s1.55-.31 2.12-.88l7.17-7.17a3.009 3.009 0 00.01-4.24zm-1.42 2.82l-7.17 7.17c-.39.39-1.02.39-1.42 0L3 11.59V3h8.59l8.29 8.29c.39.39.39 1.03 0 1.41z" /><path d="M7.01 6C6.45 6 6 6.45 6 7s.45 1 1 1 1-.45 1-1-.44-1-.99-1z" /></g></svg>
                                         </a>
-                                        <span class="mr-2"><a href="../../../tags/next-auth/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-transparent dark:hover:border-blue-200 dark:hover:text-blue-200 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
-                                    <span>next auth</span>
+                                        <span class="mr-2"><a href="../../../tags/nextauth/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-transparent dark:hover:border-blue-200 dark:hover:text-blue-200 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
+                                    <span>nextauth</span>
                                 </a></span>
                                         <span class="mr-2"><a href="../../../tags/instala%C3%A7%C3%A3o/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-transparent dark:hover:border-blue-200 dark:hover:text-blue-200 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
                                     <span>instalação</span>
                                 </a></span>
                                         <span class="mr-2"><a href="../../../tags/next.js/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-transparent dark:hover:border-blue-200 dark:hover:text-blue-200 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
                                     <span>next.js</span>
+                                </a></span>
+                                        <span class="mr-2"><a href="../../../tags/autentica%C3%A7%C3%A3o/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-transparent dark:hover:border-blue-200 dark:hover:text-blue-200 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
+                                    <span>autenticação</span>
+                                </a></span>
+                                        <span class="mr-2"><a href="../../../tags/usu%C3%A1rio/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-transparent dark:hover:border-blue-200 dark:hover:text-blue-200 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
+                                    <span>usuário</span>
                                 </a></span>
                                     </span>
                                 </div>
@@ -565,10 +1072,10 @@ providers: [
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../execucao/next.js/explicacao/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../execucao/prisma/explicacao/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Próximo</span>
-                                                <span class="block mt-1">O que é Next</span>
+                                                <span class="block mt-1">O que é Prisma?</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -583,7 +1090,7 @@ providers: [
                                     <ul class="flex flex-wrap items-center text-sm">
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. <a href="https://www.struct.unb.br/">StructCE</a> Todos os direitos reservados.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. <a href="https://www.struct.unb.br/">StructCE</a> Todos os direitos reservados.</p></div>
                             </footer>
                         </div>
                     </div>
@@ -612,6 +1119,6 @@ providers: [
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Como implementar o Next Auth em um projeto existente?", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Utilizando NextAuth em projetos", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
