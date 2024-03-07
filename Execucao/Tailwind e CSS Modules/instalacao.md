@@ -20,9 +20,9 @@ Para [instalar Tailwind](https://tailwindcss.com/docs/guides/nextjs) usando sua 
 npm install -D tailwindcss
 ```
 
-Depois, crie um arquivo chamado `tailwind.config.js`, por meio do comando `npx tailwindcss init` e adicione o seguinte código:
+Depois, crie um arquivo chamado `tailwind.config.js` (ou `.ts`) por meio do comando `npx tailwindcss init` e adicione o seguinte código:
 
-```typescript
+```typescript tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -51,7 +51,7 @@ O arquivo `tailwind.config.js` pode ter tanto essa extensão quanto `.ts`, depen
 
 Por fim, adicione as *diretivas do Tailwind* ao seu arquivo de CSS global (`src/app/globals.css`):
 
-```css
+```css src/app/global.css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -63,8 +63,26 @@ O `global.css` é um arquivo que aplica estilos de maneira global à sua aplica�
 
 ## Adicionando CSS Modules ao Projeto
 
-[TODO] Explicar isso aí.
+Para utilizar CSS Modules em sua aplicação next, basta criar arquivos com a extensão `.module.css`. Isso pode ser feito em qualquer pasta dentro de `/app`, e os arquivos CSS Modules criados podem ser importados em qualquer outro arquivo dentro dessa pasta, como a [própria documentação](https://nextjs.org/docs/app/building-your-application/styling/css-modules) exemplifica:
 
-## O que tiver mais
+```typescript app/dashboard/layout.ts
+import styles from './styles.module.css'
 
-[TODO] Explicar o que mais tiver que explicar.
+export default function DashboardLayout ({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <section className={styles.dashboard}> {children} </section>
+}
+```
+
+```css spp/dashboard/styles.modules.css
+.dashboard {
+  padding: 24px,
+  ...
+}
+```
+
+Lembrando que CSS Modules *são opcionais* e atuam em escopo local, o que significa que podem evitar conflitos de nomeclatura de classes em arquivos de estilo diferentes.
+

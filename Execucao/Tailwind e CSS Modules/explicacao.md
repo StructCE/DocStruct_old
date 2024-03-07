@@ -53,7 +53,7 @@ Tailwind tem essa idea como foco de seu funcionamento. De acordo com [sua própr
 
 ## CSS Modules
 
-*CSS Modules* são estilos escritos em CSS que atuam em escopo local.
+*CSS Modules* são estilos escritos em CSS que atuam em escopo local. São uma forma de importar arquivos CSS em um componente React.
 Next possui suporte nativo a isso por meio de arquivos nomeados com o formato `[nome].module.css`.
 
 A vantagem de usar CSS Modules é que fica mais simples evitar conflitos quando utilizamos o mesmo nome de classes em diferentes componentes da aplicação, já que o escopo de um módulo é restrito ao componente no qual foi chamado.
