@@ -1,7 +1,7 @@
 ---
 order: 1
-icon: rocket
-label: "Como usar Heroku ?"
+icon: plug
+label: "Fazendo deploy (Rails | assets estáticos)"
 ---
 
 <!-- Ultima atualização: 22/09/2023 -->
@@ -16,8 +16,8 @@ Esse deploy esta sendo feito com base em um projeto Rails
 1. Crie uma branch chamada `heroku`, caso ainda não tenha, e faça as seguintes mudanças;
 2. Crie um arquivo chamado `start.sh` na raíz do projeto com o seguinte conteúdo:
 
-``` Terminal Shell
-!/bin/sh
+```bash
+#!/bin/sh
 rails db:migrate
 bundle exec puma -C config/puma.rb
 ```
@@ -28,7 +28,13 @@ bundle exec puma -C config/puma.rb
 
 - `bundle exec puma -C config/puma.rb`: esse código funciona como um rails s, ou seja, serve para executar o puma (servidor padrão do rails) com alguns recursos a mais que o rails s por si só, não oferece.
 
-3. Caso seu projeto utilize Active Storage, ou guarda alguma imagem enviada por upload, é necessário mudar o path, no qual os arquivos ficam armazenados, escolhendo entre [cloudinary](https://cloudinary.com/documentation/ruby_rails_quickstart) e [amazon s3](https://devcenter.heroku.com/articles/active-storage-on-heroku). Execute o comando **Certo** para configurar os arquivos.
+!!!danger Caso seu projeto tenha banco de dados
+É necessário ter uma instância separada de banco de dados. Se não me engano, o Heroku possui memória volátil, ou seja, alterações e criações de arquivos após o deploy podem ser perdidas.
+!!!
+
+!!!danger Caso seu projeto utilize Active Storage
+Ou guarde alguma imagem enviada por upload, é necessário mudar o path no qual os arquivos ficam armazenados, escolhendo entre [cloudinary](https://cloudinary.com/documentation/ruby_rails_quickstart) e [amazon s3](https://devcenter.heroku.com/articles/active-storage-on-heroku). Execute o comando **Certo** para configurar os arquivos.
+!!!
 
 !!!
 Não colocar as chaves de acesso no repositório, apenas no heroku. Na branch de produção, requisitar as variáveis de ambiente no heroku, e colocar no código com `ENV['NOME_DA_VARIAVEL']`.
@@ -59,6 +65,7 @@ bundle
 ## Executando deploy do projeto
 
 ### Por CLI
+
 !!!
 Tutorial para instalar o CLI do heroku https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 !!!
@@ -71,7 +78,7 @@ heroku git:remote -a {nome_da_aplicação}
 ```
 
 3. Configure o banco de dados para PostgreSQL;
-4. E por fim execute o comando: 
+4. E por fim execute o comando:
 
 ```bash Terminal
 git push heroku {nome_da_aplicação}
@@ -84,12 +91,11 @@ git push heroku {nome_da_aplicação}
 3. Navegue até a aba Deploy e selecione a opção GitHub;
 4. Selecione o repositório do projeto;
 5. Selecione a branch `Heroku`;
-6. Selecione a opção **Deploy Branch**. 
+6. Selecione a opção **Deploy Branch**.
 
 ### Deploy front-end com heroku
 
 É possível usar do Heroku para fazer deploy de front-end. Basta criar um único endpoint para enviar os assets estáticos do front. Exemplo:
-
 
 ```js
 // /package.json
@@ -110,17 +116,18 @@ git push heroku {nome_da_aplicação}
 const express = require("express");
 //chamamos o express para o arquivo
 
-const { resolve } = require('path')
+const { resolve } = require("path");
 //para garantir que pegaremos o path exato
 
 const app = express();
 //criamos uma aplicação com o express
 
-app.use("/", 
+app.use(
+  "*",
   express.static(
     resolve(
       __dirname,
-      './build' // Onde os assets estáticos do front-end estão depois de rodar yarn build
+      "./build" // Onde os assets estáticos do front-end estão depois de rodar build
     )
   )
 );
